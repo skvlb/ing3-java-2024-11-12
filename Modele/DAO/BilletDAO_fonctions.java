@@ -1,5 +1,5 @@
-package modele.DAO;
-import modele.Billet;
+package Modele.DAO;
+import Modele.Billet;
 import java.sql.*;
 
 public class BilletDAO_fonctions implements BilletDAO{

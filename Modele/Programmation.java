@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 import java.sql.Time;
 public class Programmation {
     private int id;

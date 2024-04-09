@@ -2,11 +2,11 @@ import Modele.Billet;
 import Modele.DAO.BilletDAO_fonctions;
 import java.sql.*;
 
-public class Main {
+public class Test {
     public static void main(String[] args) {
         Billet mon_billet = new Billet(1, 3, 5, 6, 20, true);
         // Déclarations des paramètres de connexion
-        String url = "jdbc:mysql://localhost:3306/cinema?serverTimezone=UTC"; // Ajout de la timezone
+        String url = "jdbc:mysql://localhost:3306/cinema"; // URL de connexion à la base de données
         String utilisateur = "root"; // Nom d'utilisateur de la base de données
         String motDePasse = ""; // Mot de passe de la base de données
 

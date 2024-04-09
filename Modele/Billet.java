@@ -5,6 +5,7 @@ public class Billet {
     private int id_client;
     private int id_film;
     private int id_salle;
+
     private double prix;
     private boolean annulation;
     public Billet(int id_billet, int id_client, int id_film,int id_salle,double prix,boolean annulation){

@@ -7,6 +7,6 @@ public class PageAccueil extends JPanel {
 
     public PageAccueil(PagePrincipale pagePrincipale) {
         this.pagePrincipale = pagePrincipale;
-        add(new JLabel("Bienvenue à la page d'accueil!"));
+        add(new JLabel("Bienvenue sur le site de Gaumont Pathé de campagne !"));
     }
 }

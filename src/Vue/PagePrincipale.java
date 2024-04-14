@@ -14,8 +14,14 @@ public class PagePrincipale extends JFrame {
 
     private void initUI() {
         JPanel headerPanel = new JPanel();
+        
         headerPanel.setLayout(new BorderLayout(10, 10));
         headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajouter de l'espace autour du panel
+
+        // Appel du bordereau
+        BordereauSite bordereau = new BordereauSite();
+        headerPanel.add(bordereau, BorderLayout.NORTH);
+        
 
         // Logo sur le côté gauche du header
         JButton logoButton = new JButton(new ImageIcon("chemin logo")); // 

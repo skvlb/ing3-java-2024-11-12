@@ -1,2 +1,8 @@
 Ce document contient les sources utilisées pour réaliser le projet
 
+https://www.javatpoint.com/java-awt
+
+https://www.jmdoudoux.fr/java/dej/chap-swing.htm
+
+https://jmdoudoux.developpez.com/cours/developpons/java/chap-swing.php
+

@@ -1,4 +1,4 @@
-package modele.DAO;
+package Modele.DAO;
 
 public interface SalleDAO {
 }

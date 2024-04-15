@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 
 public class Client extends Utilisateur{
     TypeClient type_client;//savoir + ou moins de 18 ans, étudiant etc...

@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 
 public class Film {
     private int id;
@@ -6,7 +6,7 @@ public class Film {
     private int duree;
     private String auteur;
 
-    public Film(int id, String titre, int duree, String auteur) {
+    public Film() {
         this.id = id;
         this.titre = titre;
         this.duree = duree;

@@ -3,9 +3,9 @@ package Vue;
 import javax.swing.*;
 
 public class PageConnexion extends JPanel {
-    private PagePrincipale pagePrincipale;
+    private PageAccueil pagePrincipale;
 
-    public PageConnexion(PagePrincipale pagePrincipale) {
+    public PageConnexion(PageAccueil pagePrincipale) {
         this.pagePrincipale = pagePrincipale;
         // Configurer le layout et ajouter des composants pour la connexion ici
 

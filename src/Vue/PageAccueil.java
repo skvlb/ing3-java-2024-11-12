@@ -26,13 +26,13 @@ public class PageAccueil extends JPanel {
         headerPanel.add(titleLabel);
         
         // Panel pour les affiches de films
-        JPanel filmsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Centrer et espacer les boutons
+        JPanel filmsPanel = new JPanel(new GridLayout(1, 3, 10, 0)); // GridLayout pour aligner les boutons en une ligne
         filmsPanel.setBackground(Color.LIGHT_GRAY);
 
         // Boutons pour les films
-        film1Button = createFilmButton("images/affiches_film/godzilla.png");
-        film2Button = createFilmButton("images/affiches_film/sosfantomes.png");
-        film3Button = createFilmButton("images/affiches_film/dune.png");
+        film1Button = createFilmButton("images/affiches_film/kungfupanda.png");
+        film2Button = createFilmButton("images/affiches_film/dune.png");
+        film3Button = createFilmButton("images/affiches_film/sosfantome.png");
         
         // Ajout des boutons d'affiches au panel des films
         filmsPanel.add(film1Button);
@@ -48,17 +48,20 @@ public class PageAccueil extends JPanel {
         add(contentPane, BorderLayout.CENTER);
     }
 
-    // Méthode pour créer un bouton d'affiche de film
+    // Méthode pour créer un bouton d'affiche de film avec redimensionnement
     private JButton createFilmButton(String imagePath) {
-        ImageIcon icon = new ImageIcon(imagePath); 
-        JButton button = new JButton(icon);
+        ImageIcon originalIcon = new ImageIcon(imagePath); // Charger l'image originale
+        Image image = originalIcon.getImage(); // Transformer l'icône en une image
+        Image resizedImage = image.getScaledInstance(150, 100, Image.SCALE_SMOOTH); // Redimensionner l'image
+        ImageIcon resizedIcon = new ImageIcon(resizedImage); // Transformer l'image redimensionnée en icône
+
+        JButton button = new JButton(resizedIcon);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 System.out.println("Affiche de film cliquée!");
             }
         });

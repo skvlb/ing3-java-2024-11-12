@@ -1,5 +1,5 @@
-package modele.DAO;
-import modele.Film;
+package Modele.DAO;
+import Modele.Film;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

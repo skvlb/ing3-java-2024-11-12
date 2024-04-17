@@ -1,6 +1,6 @@
-package Modele.DAO;
+package modele.DAO;
 
-import Modele.Billet;
+import modele.Billet;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,19 +15,15 @@ public class BilletDaoImpl implements BilletDAO{
         this.daoFactory = daoFactory;
     }
 
-        @Override
-        public void ajouterBillet(Billet billet) {
-
+    public void ajouterBillet(Billet billet) {
         try (Connection connection = daoFactory.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO billet (id_billet,client_id, film_id, salle_id, prix_base, annulation) VALUES (?, ?, ?, ?, ?,?)", Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO billet (id_billet, client_id, id_programmation, prix_base, annulation) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, billet.getId_billet());
             preparedStatement.setInt(2, billet.getId_client());
-            preparedStatement.setInt(3, billet.getId_film());
-            preparedStatement.setInt(4, billet.getId_salle());
-            preparedStatement.setDouble(5, billet.getPrix());
-            preparedStatement.setBoolean(6, billet.isAnnulation());
+            preparedStatement.setInt(3, billet.getId_programmation()); // Utilisation de la nouvelle colonne id_programmation
+            preparedStatement.setDouble(4, billet.getPrix());
+            preparedStatement.setBoolean(5, billet.isAnnulation());
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
             // Gérer les erreurs de connexion ou de requête SQL
@@ -55,8 +51,7 @@ public class BilletDaoImpl implements BilletDAO{
                 Billet billet = new Billet(
                         resultSet.getInt("id_billet"),
                         resultSet.getInt("client_id"),
-                        resultSet.getInt("film_id"),
-                        resultSet.getInt("salle_id"),
+                        resultSet.getInt("id_programmation"),
                         resultSet.getDouble("prix_base"),
                         resultSet.getBoolean("annulation")
                 );

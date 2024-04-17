@@ -1,5 +1,4 @@
-package Modele.DAO;
-
+package modele.DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -42,6 +41,9 @@ public class DaoFactory {
     }
     public ProgrammationDAO getProgrammationDAO(){
         return new ProgrammationDaoImpl(this);
+    }
+    public UtilisateurDAO getUtilisateurDAO(){
+        return new UtilisateurDaoImpl(this);
     }
 }
 

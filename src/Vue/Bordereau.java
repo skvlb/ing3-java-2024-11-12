@@ -1,91 +1,109 @@
 package Vue;
 
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Bordereau extends JPanel {
-    private JButton boutonAffiche, boutonPanier, boutonRecherche;
+class Bordereau extends JPanel {
+    private JButton boutonAffiche, boutonPanier, boutonRecherche, logoBouton, boutonCompte;
     private JTextField champRecherche;
-    private JLabel etiquetteLogo;
+    private JLabel titre;
 
     public Bordereau() {
-        Color couleurDeFond = new Color(0xFFEB62); // Couleur de fond pour le panel
-        setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10)); // Ajoute un espacement
-        setBackground(couleurDeFond); // Définit la couleur de fond du panel
+        setLayout(null); 
+        setPreferredSize(new Dimension(100, 150)); // Largeur, hauteur
+        setBackground(new Color(0xFFEB62)); // Couleur de fond personnalisée
 
-        // Initialisation des composants
-        etiquetteLogo = new JLabel("GAUMONT Pathé de campagne"); // Espace pour le logo
 
+        // Initialisation et personnalisation des boutons et champ de recherche
         boutonAffiche = new JButton("À l'affiche");
+
+        ImageIcon panier = new ImageIcon("images/panier.png");
+        Image image2 = panier.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
+        boutonPanier = new JButton(new ImageIcon(image2));
+        boutonPanier.setBorderPainted(false); 
+        boutonPanier.setContentAreaFilled(false); 
+;
+        ImageIcon recherche = new ImageIcon("images/loupe.png");
+        Image image3 = recherche.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
+        boutonRecherche = new JButton(new ImageIcon(image3));
+        boutonRecherche.setBorderPainted(false); 
+        boutonRecherche.setContentAreaFilled(false); 
+
+        champRecherche = new JTextField("Saisir votre recherche", 20);
+
+        ImageIcon compte = new ImageIcon("images/moncompte.png");
+        Image image4 = compte.getImage().getScaledInstance(50, 40, Image.SCALE_SMOOTH);
+        boutonCompte= new JButton(new ImageIcon(image4));
+        boutonCompte.setBorderPainted(false); 
+        boutonCompte.setContentAreaFilled(false); 
+
         personnaliserBouton(boutonAffiche);
-
-        boutonPanier = new JButton("Mon panier");
         personnaliserBouton(boutonPanier);
-
-        champRecherche = new JTextField("Saisir votre recherche", 20); // Taille présumée du champ de recherche
-        personnaliserChampRecherche(champRecherche);
-
-        boutonRecherche = new JButton("Rechercher");
         personnaliserBouton(boutonRecherche);
+        personnaliserChampRecherche(champRecherche);
+        personnaliserBouton(boutonCompte);
 
-        // Ajout des composants au panel
-        add(etiquetteLogo);
-        add(boutonAffiche);
-        add(boutonPanier);
-        add(champRecherche);
-        add(boutonRecherche);
+        // Création et positionnement du logo
+        ImageIcon icon = new ImageIcon("images/logo gaumont.png");
+        Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        logoBouton = new JButton(new ImageIcon(image));
+        logoBouton.setBounds(10, 13, 120, 120); // x, y, largeur, hauteur
+        logoBouton.setBorderPainted(false); 
+        logoBouton.setContentAreaFilled(false); 
+
+        // Création et positionnement du titre
+        titre = new JLabel("GAUMONT Pathé de campagne");
+        titre.setFont(new Font(titre.getFont().getName(), Font.BOLD, 24));
+        Dimension sizeTitre = titre.getPreferredSize();
+        titre.setBounds(575, 5, sizeTitre.width, sizeTitre.height); // x, y, largeur, hauteur
+
+        // Création et positionnement du panel des boutons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(null); // Pas de gestionnaire de disposition pour un positionnement manuel
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBounds(430,58, 1200, 100); // x, y, largeur, hauteur
+        boutonAffiche.setBounds(80, 0, 120, 40); // x, y, largeur, hauteur
+        boutonPanier.setBounds(470, 0, 120, 40); // x, y, largeur, hauteur
+        champRecherche.setBounds(220, 0, 200, 40); // x, y, largeur, hauteur
+        boutonRecherche.setBounds(400, 0, 120, 40); // x, y, largeur, hauteur
+        boutonCompte.setBounds(950,0, 100, 40); // x, y, largeur, hauteur
+
+        // Ajout des composants au panel des boutons
+        buttonPanel.add(boutonAffiche);
+        buttonPanel.add(boutonPanier);
+        buttonPanel.add(champRecherche);
+        buttonPanel.add(boutonRecherche);
+        buttonPanel.add(boutonCompte);
+
+        // Ajout des composants au Bordereau
+        add(logoBouton);
+        add(titre);
+        add(buttonPanel);
     }
 
     private void personnaliserBouton(JButton bouton) {
         bouton.setForeground(Color.WHITE);
+        bouton.setBackground(Color.BLACK);
+        bouton.setPreferredSize(new Dimension(120, 40));
         bouton.setFocusPainted(false);
-        bouton.setFont(new Font("Arial", Font.BOLD, 18));
-        bouton.setBorderPainted(false);
-        bouton.setContentAreaFilled(false);
-        bouton.setOpaque(false);
-        
-        // Applique un rendu personnalisé pour le bouton
-        bouton.setUI(new BoutonArrondiUI());
+        bouton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bouton.setBackground(Color.DARK_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                bouton.setBackground(Color.BLACK);
+            }
+        });
     }
 
     private void personnaliserChampRecherche(JTextField champ) {
         champ.setForeground(Color.BLACK);
-        champ.setFont(new Font("Arial", Font.PLAIN, 18));
-        champ.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        champ.setPreferredSize(new Dimension(250, 40)); // Définit la taille préférée du champ de recherche
-    }
-
-    // UI personnalisé pour les boutons avec des bords arrondis
-    private static class BoutonArrondiUI extends javax.swing.plaf.basic.BasicButtonUI {
-        @Override
-        public void paint(Graphics g, JComponent c) {
-            JButton b = (JButton) c;
-            if (b.isContentAreaFilled()) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(b.getBackground());
-                g2.fill(new RoundRectangle2D.Float(0, 0, b.getWidth(), b.getHeight(), 20, 20));
-                g2.dispose();
-            }
-            super.paint(g, c);
-        }
-    }
-
-    // Classe pour peindre une bordure arrondie sur un bouton
-    private static class BordureArrondie extends AbstractBorder {
-        private int rayon;
-
-        BordureArrondie(int rayon) {
-            this.rayon = rayon;
-        }
-
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.WHITE);
-            g2.draw(new RoundRectangle2D.Float(x, y, width - 1, height - 1, rayon, rayon));
-        }
+        champ.setBackground(Color.WHITE);
+        champ.setPreferredSize(new Dimension(200, 40));
     }
 }

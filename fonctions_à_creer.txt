@@ -1,0 +1,7 @@
+POUR KARL :
+Partie utilisateur:
+    - Fonction ajout utiisateur (création compte) une requete qui recupere les champs de la page et qui ajoute un utilisateur
+    - Fonction connexion , une requete qui avec le mail donné dans le champ check si le mdp entré est bien le bon (le mdp sera hashé mais ca je m'en charge)
+
+Partie Billet/reservation:
+    - lorsque l'utilisateur choisi un film et sa séance ainsi qu'une place , il faut ajouter toutes les information selectionnées sur la page dans programmation 

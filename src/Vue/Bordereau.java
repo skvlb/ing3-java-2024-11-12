@@ -111,8 +111,6 @@ class Bordereau extends JPanel {
        
     }
     
-    
-
     private void personnaliserBouton(JButton bouton) {
         bouton.setForeground(Color.WHITE);
         bouton.setBackground(Color.BLACK);

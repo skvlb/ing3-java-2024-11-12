@@ -16,9 +16,8 @@ public class PageConnexion extends JFrame {
 
     public PageConnexion() {
         setTitle("Page Connexion");
-        setSize(1920, 1080); // Set the window size as per the wireframe requirement
+        setSize(1920, 1080); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setLayout(null);
         mainPanel = new JPanel();
 
         mainPanel.setLayout(null);

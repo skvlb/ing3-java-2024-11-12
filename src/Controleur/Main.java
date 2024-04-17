@@ -1,7 +1,9 @@
 package Controleur;
 
-import Vue.*;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
+import Vue.PageAccueil;
 
 public class Main {
 

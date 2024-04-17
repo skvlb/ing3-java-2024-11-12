@@ -19,13 +19,13 @@ class Bordereau extends JPanel {
         // Initialisation et personnalisation des boutons et champ de recherche
         boutonAffiche = new JButton("À l'affiche");
 
-        ImageIcon panier = new ImageIcon("images/panier.png");
+        ImageIcon panier = new ImageIcon("images/logo/panier.png");
         Image image2 = panier.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
         boutonPanier = new JButton(new ImageIcon(image2));
         boutonPanier.setBorderPainted(false); 
         boutonPanier.setContentAreaFilled(false); 
 ;
-        ImageIcon recherche = new ImageIcon("images/loupe.png");
+        ImageIcon recherche = new ImageIcon("images/logo/loupe.png");
         Image image3 = recherche.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
         boutonRecherche = new JButton(new ImageIcon(image3));
         boutonRecherche.setBorderPainted(false); 
@@ -33,7 +33,7 @@ class Bordereau extends JPanel {
 
         champRecherche = new JTextField("Saisir votre recherche", 20);
 
-        ImageIcon compte = new ImageIcon("images/moncompte.png");
+        ImageIcon compte = new ImageIcon("images/logo/moncompte.png");
         Image image4 = compte.getImage().getScaledInstance(50, 40, Image.SCALE_SMOOTH);
         boutonCompte= new JButton(new ImageIcon(image4));
         boutonCompte.setBorderPainted(false); 
@@ -46,7 +46,7 @@ class Bordereau extends JPanel {
         personnaliserBouton(boutonCompte);
 
         // Création et positionnement du logo
-        ImageIcon icon = new ImageIcon("images/logo gaumont.png");
+        ImageIcon icon = new ImageIcon("images/logo/logo gaumont.png");
         Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
         logoBouton = new JButton(new ImageIcon(image));
         logoBouton.setBounds(10, 13, 120, 120); // x, y, largeur, hauteur
@@ -81,7 +81,37 @@ class Bordereau extends JPanel {
         add(logoBouton);
         add(titre);
         add(buttonPanel);
+
+        boutonAffiche.addActionListener(e -> {
+            System.out.println("Le bouton 'À l'affiche' a été cliqué");
+            // a faire 
+        });
+    
+        boutonPanier.addActionListener(e -> {
+            System.out.println("Le bouton 'Mon panier' a été cliqué");
+            // a faire 
+        });
+    
+        boutonRecherche.addActionListener(e -> {
+            String rechercheTexte = champRecherche.getText(); // Récupère le texte du champ de recherche
+            System.out.println("Recherche pour : " + rechercheTexte); 
+            // a faire 
+        });
+    
+        boutonCompte.addActionListener(e -> {
+            System.out.println("Le bouton 'Mon compte' a été cliqué");
+            //  a faire
+        });
+    
+        logoBouton.addActionListener(e -> {
+            System.out.println("Le logo/bouton a été cliqué");
+            //  a faire
+        });
+    
+       
     }
+    
+    
 
     private void personnaliserBouton(JButton bouton) {
         bouton.setForeground(Color.WHITE);

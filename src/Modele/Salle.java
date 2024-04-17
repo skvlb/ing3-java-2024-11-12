@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 
 public class Salle {
     private int id;

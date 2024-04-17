@@ -1,5 +1,5 @@
-package Modele.DAO;
-import Modele.Film;
+package modele.DAO;
+import modele.Film;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,23 +13,46 @@ public class FilmDaoImpl implements FilmDAO {
 
     @Override
     public void ajouterFilm(Film film) {
-        String query = "INSERT INTO film (titre, duree, auteur) VALUES (?, ?, ?)";
+        String query = "INSERT INTO film (id_film,titre, duree, auteur, image_path) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, film.getTitre());
-            preparedStatement.setInt(2, film.getDuree());
-            preparedStatement.setString(3, film.getAuteur());
+            preparedStatement.setInt(1, film.getId());
+            preparedStatement.setString(2, film.getTitre());
+            preparedStatement.setInt(3, film.getDuree());
+            preparedStatement.setString(4, film.getAuteur());
+            preparedStatement.setString(5, film.getImagePath()); // Ajouter le chemin d'accès de l'image
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+
     @Override
     public void modifierFilm(Film film) {
 
     }
-
+    @Override
+    public String rechercherFilmparNom(String nomFilm) {
+        String resultatRecherche = "";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM film WHERE titre LIKE ?")) {
+            preparedStatement.setString(1, "%" + nomFilm + "%");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idFilm = resultSet.getInt("id_film");
+                    String titre = resultSet.getString("titre");
+                    int duree = resultSet.getInt("duree");
+                    String auteur = resultSet.getString("auteur");
+                    resultatRecherche += "ID: " + idFilm + ", Titre: " + titre + ", Durée: " + duree + ", Auteur: " + auteur + "\n";
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de connexion ou de requête SQL
+        }
+        return resultatRecherche;
+    }
     @Override
     public void supprimerFilm(int id) {
         String query = "DELETE FROM film WHERE id = ?";

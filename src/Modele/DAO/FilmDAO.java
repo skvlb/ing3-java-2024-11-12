@@ -1,6 +1,6 @@
-package Modele.DAO;
+package modele.DAO;
 
-import Modele.Film;
+import modele.Film;
 
 import java.util.List;
 
@@ -11,4 +11,5 @@ public interface FilmDAO {
         void supprimerFilm(int id);
         Film getFilmById(int id);
         List<Film> getAllFilms();
-    }
+        public String rechercherFilmparNom(String nomFilm);
+}

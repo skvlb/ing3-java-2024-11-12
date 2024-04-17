@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 import java.sql.Time;
 public class Programmation {
     private int id;
@@ -8,7 +8,8 @@ public class Programmation {
     private Time heureFin;
 
     // Constructeur
-    public Programmation(int filmId, int salleId,Time heureDebut,Time heureFin) {
+    public Programmation(int id,int filmId, int salleId,Time heureDebut,Time heureFin) {
+        this.id=id;
         this.filmId = filmId;
         this.salleId = salleId;
         this.heureDebut = heureDebut;

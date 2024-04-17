@@ -1,4 +1,4 @@
-package Modele;
+package modele;
 
 public class Utilisateur {
     private int id;
@@ -8,13 +8,14 @@ public class Utilisateur {
     private String MotDePasse;
     private String telephone;
     private int type;
-    public Utilisateur(int id, String nom, String prenom, String email, String motDePasse, String telephone) {
+    public Utilisateur(int id, String nom, String prenom, String email, String motDePasse, String telephone,int type) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.MotDePasse = motDePasse;
-        this.telephone = telephone;
+        this.type=type;
+        this.telephone=telephone;
     }
     public int getId() {
         return id;

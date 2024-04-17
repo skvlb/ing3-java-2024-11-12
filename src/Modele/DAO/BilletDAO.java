@@ -1,8 +1,8 @@
-package Modele.DAO;
+package modele.DAO;
 import java.sql.SQLException;
 import java.util.List;
 
-import Modele.Billet;
+import modele.Billet;
 
 public interface BilletDAO {
     void ajouterBillet(Billet billet);

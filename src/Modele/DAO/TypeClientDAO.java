@@ -1,4 +1,4 @@
-package Modele.DAO;
+package modele.DAO;
 
 public interface TypeClientDAO {
 }

@@ -2,136 +2,100 @@ package Vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 
 class Bordereau extends JPanel {
-    private JButton boutonAffiche, boutonPanier, boutonRecherche, logoBouton, boutonCompte;
+    private JButton boutonAffiche, boutonPanier, boutonRecherche, boutonCompte, logoBouton;
     private JTextField champRecherche;
     private JLabel titre;
 
     public Bordereau() {
-        setLayout(null); 
-        setPreferredSize(new Dimension(100, 150)); // Largeur, hauteur
-        setBackground(new Color(0xFFEB62)); // Couleur de fond personnalisée
-
-
-        // Initialisation et personnalisation des boutons et champ de recherche
-        boutonAffiche = new JButton("À l'affiche");
-
-        ImageIcon panier = new ImageIcon("images/logo/panier.png");
-        Image image2 = panier.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
-        boutonPanier = new JButton(new ImageIcon(image2));
-        boutonPanier.setBorderPainted(false); 
-        boutonPanier.setContentAreaFilled(false); 
-;
-        ImageIcon recherche = new ImageIcon("images/logo/loupe.png");
-        Image image3 = recherche.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
-        boutonRecherche = new JButton(new ImageIcon(image3));
-        boutonRecherche.setBorderPainted(false); 
-        boutonRecherche.setContentAreaFilled(false); 
-
-        champRecherche = new JTextField("Saisir votre recherche", 20);
-
-        ImageIcon compte = new ImageIcon("images/logo/moncompte.png");
-        Image image4 = compte.getImage().getScaledInstance(50, 40, Image.SCALE_SMOOTH);
-        boutonCompte= new JButton(new ImageIcon(image4));
-        boutonCompte.setBorderPainted(false); 
-        boutonCompte.setContentAreaFilled(false); 
-
-        personnaliserBouton(boutonAffiche);
-        personnaliserBouton(boutonPanier);
-        personnaliserBouton(boutonRecherche);
-        personnaliserChampRecherche(champRecherche);
-        personnaliserBouton(boutonCompte);
+        setLayout(null); // Utilisation de null layout pour un positionnement libre
+        setPreferredSize(new Dimension(1920, 175)); 
+        setBackground(new Color(0xFFEB62)); // Couleur de fond
 
         // Création et positionnement du logo
-        ImageIcon icon = new ImageIcon("images/logo/logo gaumont.png");
-        Image image = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-        logoBouton = new JButton(new ImageIcon(image));
-        logoBouton.setBounds(10, 13, 120, 120); // x, y, largeur, hauteur
-        logoBouton.setBorderPainted(false); 
-        logoBouton.setContentAreaFilled(false); 
+        logoBouton = creerBoutonIcone("images/logo/logo gaumont.png", 140, 160);
+        logoBouton.setBounds(8, 7, 140, 160); // Position et taille
+        add(logoBouton);
 
         // Création et positionnement du titre
-        titre = new JLabel("GAUMONT Pathé de campagne");
+        titre = new JLabel("GAUMONT Pathé de campagne", SwingConstants.CENTER);
         titre.setFont(new Font(titre.getFont().getName(), Font.BOLD, 24));
-        Dimension sizeTitre = titre.getPreferredSize();
-        titre.setBounds(575, 5, sizeTitre.width, sizeTitre.height); // x, y, largeur, hauteur
-
-        // Création et positionnement du panel des boutons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(null); // Pas de gestionnaire de disposition pour un positionnement manuel
-        buttonPanel.setOpaque(false);
-        buttonPanel.setBounds(430,58, 1200, 100); // x, y, largeur, hauteur
-        boutonAffiche.setBounds(80, 0, 120, 40); // x, y, largeur, hauteur
-        boutonPanier.setBounds(470, 0, 120, 40); // x, y, largeur, hauteur
-        champRecherche.setBounds(220, 0, 200, 40); // x, y, largeur, hauteur
-        boutonRecherche.setBounds(400, 0, 120, 40); // x, y, largeur, hauteur
-        boutonCompte.setBounds(950,0, 100, 40); // x, y, largeur, hauteur
-
-        // Ajout des composants au panel des boutons
-        buttonPanel.add(boutonAffiche);
-        buttonPanel.add(boutonPanier);
-        buttonPanel.add(champRecherche);
-        buttonPanel.add(boutonRecherche);
-        buttonPanel.add(boutonCompte);
-
-        // Ajout des composants au Bordereau
-        add(logoBouton);
+        titre.setBounds(555, 10, 400, 30); // Position et taille
         add(titre);
-        add(buttonPanel);
 
-        boutonAffiche.addActionListener(e -> {
-            System.out.println("Le bouton 'À l'affiche' a été cliqué");
-            // a faire 
-        });
-    
-        boutonPanier.addActionListener(e -> {
-            System.out.println("Le bouton 'Mon panier' a été cliqué");
-            // a faire 
-        });
-    
-        boutonRecherche.addActionListener(e -> {
-            String rechercheTexte = champRecherche.getText(); // Récupère le texte du champ de recherche
-            System.out.println("Recherche pour : " + rechercheTexte); 
-            // a faire 
-        });
-    
-        boutonCompte.addActionListener(e -> {
-            System.out.println("Le bouton 'Mon compte' a été cliqué");
-            //  a faire
-        });
-    
-        logoBouton.addActionListener(e -> {
-            System.out.println("Le logo/bouton a été cliqué");
-            //  a faire
-        });
-    
-       
+        // Création et positionnement des boutons et du champ de recherche
+        boutonAffiche = new JButton("À l'affiche");
+        personnaliserBouton(boutonAffiche);
+        boutonAffiche.setBounds(500, 75, 120, 40); // Position et taille
+        
+        boutonPanier = creerBoutonIcone("images/logo/panier.png", 70, 40);
+        boutonPanier.setBounds(935, 75, 70, 40); // Position et taille
+        
+        boutonRecherche = creerBoutonIcone("images/logo/loupe.png", 70, 40);
+        boutonRecherche.setBounds(845, 75, 70, 40); // Position et taille
+        
+        boutonCompte = creerBoutonIcone("images/logo/moncompte.png", 50, 40);
+        boutonCompte.setBounds(1460, 75, 50, 40); // Position et taille
+        
+        champRecherche = new JTextField("Saisir votre recherche", 20);
+        personnaliserChampRecherche(champRecherche);
+        champRecherche.setBounds(640, 75, 200, 40); // Position et taille
+
+        add(boutonAffiche);
+        add(boutonPanier);
+        add(boutonRecherche);
+        add(boutonCompte);
+        add(champRecherche);
+
+        // Ajout des écouteurs d'événements
+        addActionListeners();
     }
-    
+
+    private JButton creerBoutonIcone(String cheminIcone, int largeur, int hauteur) {
+        ImageIcon icone = new ImageIcon(cheminIcone);
+        Image image = icone.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+        JButton bouton = new JButton(new ImageIcon(image));
+        bouton.setBorderPainted(false);
+        bouton.setContentAreaFilled(false);
+        bouton.setFocusPainted(false);
+        return bouton;
+    }
+
     private void personnaliserBouton(JButton bouton) {
         bouton.setForeground(Color.WHITE);
         bouton.setBackground(Color.BLACK);
         bouton.setPreferredSize(new Dimension(120, 40));
         bouton.setFocusPainted(false);
-        bouton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                bouton.setBackground(Color.DARK_GRAY);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                bouton.setBackground(Color.BLACK);
-            }
-        });
     }
 
     private void personnaliserChampRecherche(JTextField champ) {
         champ.setForeground(Color.BLACK);
         champ.setBackground(Color.WHITE);
         champ.setPreferredSize(new Dimension(200, 40));
+    }
+
+    private void addActionListeners() {
+        ActionListener actionListener = e -> {
+            JButton source = (JButton) e.getSource();
+            if (source == boutonAffiche) {
+                System.out.println("Le bouton 'À l'affiche' a été cliqué");
+            } else if (source == boutonPanier) {
+                System.out.println("Le bouton 'Mon panier' a été cliqué");
+            } else if (source == boutonRecherche) {
+                System.out.println("Recherche pour : " + champRecherche.getText());
+            } else if (source == boutonCompte) {
+                System.out.println("Le bouton 'Mon compte' a été cliqué");
+            } else if (source == logoBouton) {
+                System.out.println("Le logo/bouton a été cliqué");
+            }
+        };
+
+        boutonAffiche.addActionListener(actionListener);
+        boutonPanier.addActionListener(actionListener);
+        boutonRecherche.addActionListener(actionListener);
+        boutonCompte.addActionListener(actionListener);
+        logoBouton.addActionListener(actionListener);
     }
 }

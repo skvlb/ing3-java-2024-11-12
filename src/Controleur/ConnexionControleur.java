@@ -52,7 +52,6 @@ public class ConnexionControleur {
         else{
             return true;       
         }
-         // Temporairement retourné faux pour l'exemple
     }
 
     public static void main(String[] args) {

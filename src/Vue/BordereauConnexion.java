@@ -1,7 +1,11 @@
 package Vue;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 public class BordereauConnexion extends JPanel {
@@ -13,15 +17,15 @@ public class BordereauConnexion extends JPanel {
         //setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10)); 
         setLayout(null);
         setBackground(couleurDeFond); 
-        setPreferredSize(new Dimension(1920, 100));
+        //setPreferredSize(new Dimension(100, 150));
 
         titrePage = new JLabel("GAUMONT Pathé de campagne"); 
         titrePage.setFont(new Font("Arial", Font.BOLD, 30)); 
-        titrePage.setBounds(735, 30, 450, 50); // Position et dimension du label
+        titrePage.setBounds(640, 30, 500, 50); // Position et dimension du label
 
         // A remplacer par une photo maison 
         boutonRetourAccueil = new JButton("Accueil"); 
-        boutonRetourAccueil.setBounds(50, 30, 100, 30);
+        boutonRetourAccueil.setBounds(50, 30, 150, 30);
 
         parametreBouton(boutonRetourAccueil);
 

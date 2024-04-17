@@ -24,7 +24,7 @@ public class PageConnexion extends JFrame {
         mainPanel.setLayout(null);
 
         
-        bordereauConnexion = new BordereauConnexion();
+        //bordereauConnexion = new BordereauConnexion();
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());

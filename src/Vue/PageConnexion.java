@@ -24,7 +24,7 @@ public class PageConnexion extends JFrame {
         mainPanel.setLayout(null);
 
         
-        //bordereauConnexion = new BordereauConnexion();
+        bordereauConnexion = new BordereauConnexion();
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -36,7 +36,7 @@ public class PageConnexion extends JFrame {
         add(mainPanel);
 
 
-
+/*
 
         // Ajouter une zone de texte
         textField = new JTextField();
@@ -52,6 +52,7 @@ public class PageConnexion extends JFrame {
         bouton2 = new JButton("Bouton 2");
         bouton2.setBounds(630, 50, 150, 30); // Position et dimension du deuxième bouton
         mainPanel.add(bouton2);
+*/
 
     }
     public static void main(String[] args) {

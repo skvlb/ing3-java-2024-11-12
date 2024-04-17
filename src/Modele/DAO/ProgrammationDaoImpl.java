@@ -1,5 +1,5 @@
-package modele.DAO;
-import modele.Programmation;
+package Modele.DAO;
+import Modele.Programmation;
 
 import java.sql.*;
 import java.util.ArrayList;

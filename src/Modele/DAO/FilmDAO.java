@@ -1,6 +1,6 @@
-package modele.DAO;
+package Modele.DAO;
 
-import modele.Film;
+import Modele.Film;
 
 import java.util.List;
 

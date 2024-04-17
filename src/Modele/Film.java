@@ -1,4 +1,4 @@
-package modele;
+package Modele;
 
 public class Film {
     private int id;

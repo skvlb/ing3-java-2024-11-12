@@ -1,11 +1,11 @@
-package modele.DAO;
+package Modele.DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.DAO.*;
-import modele.Utilisateur;
+import Modele.DAO.*;
+import Modele.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDAO{
     private final DaoFactory daoFactory;

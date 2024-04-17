@@ -1,6 +1,6 @@
-package modele.DAO;
+package Modele.DAO;
 
-import modele.Utilisateur;
+import Modele.Utilisateur;
 
 import java.util.List;
 

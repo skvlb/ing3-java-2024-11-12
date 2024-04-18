@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 09 avr. 2024 à 13:24
+-- Généré le : jeu. 18 avr. 2024 à 12:25
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `cinema`
 --
-CREATE DATABASE IF NOT EXISTS `cinema` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `cinema`;
 
 -- --------------------------------------------------------
 
@@ -31,24 +29,14 @@ USE `cinema`;
 
 DROP TABLE IF EXISTS `billet`;
 CREATE TABLE IF NOT EXISTS `billet` (
-  `id_billet` int(11) NOT NULL AUTO_INCREMENT,
+  `id_billet` int(11) NOT NULL,
+  `id_programmation` int(11) DEFAULT NULL,
   `client_id` int(11) DEFAULT NULL,
-  `film_id` int(11) DEFAULT NULL,
-  `salle_id` int(11) DEFAULT NULL,
   `prix_base` decimal(10,2) DEFAULT NULL,
   `annulation` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_billet`),
-  KEY `client_id` (`client_id`),
-  KEY `film_id` (`film_id`),
-  KEY `salle_id` (`salle_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `billet`
---
-
-INSERT INTO `billet` (`id_billet`, `client_id`, `film_id`, `salle_id`, `prix_base`, `annulation`) VALUES
-(1, 3, 5, 6, '20.00', 1);
+  KEY `client_id` (`client_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,12 +82,20 @@ CREATE TABLE IF NOT EXISTS `employe` (
 
 DROP TABLE IF EXISTS `film`;
 CREATE TABLE IF NOT EXISTS `film` (
-  `id_film` int(11) NOT NULL AUTO_INCREMENT,
+  `id_film` int(11) NOT NULL,
   `titre` varchar(255) DEFAULT NULL,
   `duree` int(11) DEFAULT NULL,
   `auteur` varchar(255) DEFAULT NULL,
+  `image_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_film`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `film`
+--
+
+INSERT INTO `film` (`id_film`, `titre`, `duree`, `auteur`, `image_path`) VALUES
+(3, 'blabla', 15, 'LILIAN', 'C:\\Projet_Java_ING3\\Matriximg.jpg');
 
 -- --------------------------------------------------------
 
@@ -109,15 +105,24 @@ CREATE TABLE IF NOT EXISTS `film` (
 
 DROP TABLE IF EXISTS `programmation`;
 CREATE TABLE IF NOT EXISTS `programmation` (
-  `id_programmation` int(11) NOT NULL AUTO_INCREMENT,
+  `id_programmation` int(11) NOT NULL,
   `film_id` int(11) DEFAULT NULL,
   `salle_id` int(11) DEFAULT NULL,
   `heure_debut` time DEFAULT NULL,
   `heure_fin` time DEFAULT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`id_programmation`),
   KEY `film_id` (`film_id`),
   KEY `salle_id` (`salle_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `programmation`
+--
+
+INSERT INTO `programmation` (`id_programmation`, `film_id`, `salle_id`, `heure_debut`, `heure_fin`, `date`) VALUES
+(5, 3, 4, '14:00:00', '16:30:00', '2024-04-17'),
+(4, 3, 4, '10:00:00', '12:30:00', '2024-04-17');
 
 -- --------------------------------------------------------
 
@@ -148,16 +153,6 @@ CREATE TABLE IF NOT EXISTS `typeclient` (
   PRIMARY KEY (`id_type`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `typeclient`
---
-
-INSERT INTO `typeclient` (`id_type`, `description`, `reduction`) VALUES
-(1, 'normal', '0.00'),
-(2, 'enfant', '0.30'),
-(3, 'etudiant', '0.15'),
-(4, 'senior', '0.20');
-
 -- --------------------------------------------------------
 
 --
@@ -166,7 +161,7 @@ INSERT INTO `typeclient` (`id_type`, `description`, `reduction`) VALUES
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
+  `id_utilisateur` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `prenom` varchar(255) DEFAULT NULL,
   `email` varchar(191) NOT NULL,
@@ -176,54 +171,6 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
---
--- Base de données : `ma_base_de_donnees`
---
-CREATE DATABASE IF NOT EXISTS `ma_base_de_donnees` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `ma_base_de_donnees`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `utilisateur`
---
-
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Age` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
---
--- Base de données : `my_database`
---
-CREATE DATABASE IF NOT EXISTS `my_database` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `my_database`;
---
--- Base de données : `product`
---
-CREATE DATABASE IF NOT EXISTS `product` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `product`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `product`
---
-
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE IF NOT EXISTS `product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(255) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
---
--- Base de données : `utilisateur`
---
-CREATE DATABASE IF NOT EXISTS `utilisateur` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `utilisateur`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

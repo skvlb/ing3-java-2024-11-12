@@ -91,6 +91,8 @@ class Bordereau extends JPanel {
             } else if (source == boutonRecherche) {
                 System.out.println("Recherche pour : " + champRecherche.getText());
             } else if (source == boutonCompte) {
+                PageConnexion pageConnexion = new PageConnexion();
+                mainFrame.changePanel(pageConnexion);
                 System.out.println("Le bouton 'Mon compte' a été cliqué");
             } else if (source == logoBouton) {
                 mainFrame.initializeCenterPanel();

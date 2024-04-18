@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Page_Creation_utilisateur extends JPanel {
-    private BordereauConnexion bordereauConnexion; // Assurez-vous que BordereauConnexion est également un JPanel
+    private BordereauConnexion bordereauConnexion; l
     private JTextField nomField;
     private JTextField prenomField;
     private JTextField emailField;
@@ -15,13 +15,13 @@ public class Page_Creation_utilisateur extends JPanel {
 
     public Page_Creation_utilisateur() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800, 600)); // Définir la taille préférée pour le panel
+        setPreferredSize(new Dimension(800, 600)); 
 
-        // Créer le bordereau de connexion et l'ajouter en haut
+        // Création bordereau en haut 
         bordereauConnexion = new BordereauConnexion();
         add(bordereauConnexion, BorderLayout.NORTH);
 
-        // Créer un panneau pour les champs de texte
+        // Création panel pour le text (les champs à remplir)
         JPanel champsPanel = new JPanel(null);
         champsPanel.setPreferredSize(new Dimension(800, 450));
 
@@ -52,14 +52,14 @@ public class Page_Creation_utilisateur extends JPanel {
         panel.add(txt);
     }
 
-    // Getters pour récupérer les textes des champs
+    
     public String getNom() { return nomField.getText(); }
     public String getPrenom() { return prenomField.getText(); }
     public String getEmail() { return emailField.getText(); }
     public String getTelephone() { return telephoneField.getText(); }
     public String getMotDePasse() { return mdpField.getText(); }
 
-    // Setters pour ajouter un ActionListener au bouton valider
+    
     public void setBoutonValiderListener(ActionListener listener) {
         boutonValider.addActionListener(listener);
     }

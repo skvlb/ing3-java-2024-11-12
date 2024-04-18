@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import Controleur.ConnexionControleur;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -66,7 +66,6 @@ public class PageConnexion extends JPanel {
         labelPassword.setFont(new Font("Arial", Font.BOLD, 16)); 
 
         labelPassword.setBounds(640, 225, 125, heightBouton);
-        labelPassword.setLayout(null);
         add(labelPassword);
 
         // CHAMP PASSWORD

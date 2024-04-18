@@ -67,6 +67,25 @@ public class FilmDaoImpl implements FilmDAO {
 
     @Override
     public Film getFilmById(int id) {
+        String query = "SELECT id_film, titre, duree, auteur, image_path FROM film WHERE id_film = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Film(
+                        resultSet.getInt("id_film"),
+                        resultSet.getString("titre"),
+                        resultSet.getInt("duree"),
+                        resultSet.getString("auteur"),
+                        resultSet.getString("image_path")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

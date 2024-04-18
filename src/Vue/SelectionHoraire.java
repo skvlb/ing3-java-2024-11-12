@@ -1,51 +1,84 @@
 package Vue;
 
+import Modele.DAO.DaoFactory;
+import Modele.Film;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SelectionHoraire extends JPanel {
     private int idFilm;
-    private List<String> horaires;
+    private JLabel afficheLabel;
+    private JPanel datePanel;
+    private JPanel horairesPanel;
+    private DaoFactory daoFactory;
+    private JSpinner dateSpinner;
+    private List<Time> horaires;
 
-    public SelectionHoraire(int idFilm) {
+    public SelectionHoraire(int idFilm, DaoFactory daoFactory) {
         this.idFilm = idFilm;
-        setLayout(new BorderLayout());
-        // Récupérer les horaires à partir de la méthode DAO
-        this.horaires = recupererHoraires(idFilm);
-
-        // Panel pour afficher les horaires à droite
-        JPanel horairesPanel = new JPanel();
+        this.daoFactory = daoFactory;
+        
+        setLayout(new BorderLayout(10, 0)); // Espacement horizontal entre les composants
+        
+        // Panel de gauche pour l'affiche
+        JPanel affichePanel = new JPanel(new BorderLayout());
+        Film film = daoFactory.getFilmDAO().getFilmById(idFilm);
+            String imagePath = film.getImagePath();
+            ImageIcon imageIcon = new ImageIcon(imagePath);
+            Image image = imageIcon.getImage().getScaledInstance(350, 550, Image.SCALE_SMOOTH); // Largeur fixe, hauteur dynamique
+            afficheLabel = new JLabel(new ImageIcon(image));
+        affichePanel.add(afficheLabel, BorderLayout.CENTER);
+        affichePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Marge autour de l'affiche
+        
+        // Panel de droite pour les horaires et la sélection de la date
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        
+        // Panel pour la sélection de la date
+        datePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        dateSpinner = createDateSpinner();
+        datePanel.add(dateSpinner);
+        
+        // Panel pour les horaires
+        horairesPanel = new JPanel();
         horairesPanel.setLayout(new BoxLayout(horairesPanel, BoxLayout.Y_AXIS));
-
-        // Ajouter les boutons d'horaires
-        for (String horaire : horaires) {
-            JButton horaireBtn = new JButton(horaire);
-            horaireBtn.addActionListener(e -> {
-                System.out.println("Horaire " + horaire + " pour le film ID " + idFilm + " sélectionné");
-                // Ajouter l'action à exécuter lorsque l'horaire est sélectionné
-                // Par exemple, appeler une méthode avec l'heure de début
-                // votreMethodePourObtenirHeureDebut(idFilm, horaire);
+        
+        // Ajouter les sous-panels au panel de droite
+        rightPanel.add(datePanel);
+        rightPanel.add(horairesPanel);
+        
+        // Ajouter les panels principaux à la fenêtre
+        add(affichePanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.CENTER);
+    }
+    
+    private JSpinner createDateSpinner() {
+        Date today = new Date();
+        JSpinner spinner = new JSpinner(new SpinnerDateModel(today, today, null, Calendar.DAY_OF_YEAR));
+        spinner.setEditor(new JSpinner.DateEditor(spinner, "yyyy-MM-dd"));
+        spinner.setMaximumSize(new Dimension(200, 30)); // Taille du spinner
+        spinner.addChangeListener(e -> {
+            Date selectedDate = (Date) spinner.getValue();
+            updateHoraires(new java.sql.Date(selectedDate.getTime()));
+        });
+        return spinner;
+    }
+    
+    private void updateHoraires(java.sql.Date date) {
+        horairesPanel.removeAll();
+        this.horaires = daoFactory.getProgrammationDAO().getHorairesParIdFilmEtDate(idFilm, date);
+        for (Time horaire : horaires) {
+            JButton horaireButton = new JButton(String.format("%tR", horaire));
+            horaireButton.addActionListener(e -> {
+                // Action pour chaque bouton d'horaire
             });
-            horairesPanel.add(horaireBtn);
+            horairesPanel.add(horaireButton);
         }
-        add(horairesPanel, BorderLayout.EAST);
-    }
-
-    // Méthode factice pour récupérer les horaires à partir de la DAO
-    private List<String> recupererHoraires(int idFilm) {
-        // Ici, vous utiliserez votre DAO pour obtenir les horaires associés à l'ID du film
-        // Par exemple, FilmDao filmDao = new FilmDao(); puis filmDao.getHoraires(idFilm);
-        // Retournez la liste d'horaires simulée pour l'exemple
-        return List.of("10:00", "13:00", "16:00", "19:00");
-    }
-
-    public void setHoraireButtonListener(ActionListener listener) {
-        for (Component comp : getComponents()) {
-            if (comp instanceof JButton) {
-                ((JButton) comp).addActionListener(listener);
-            }
-        }
+        horairesPanel.revalidate();
+        horairesPanel.repaint();
     }
 }

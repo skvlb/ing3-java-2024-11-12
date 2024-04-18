@@ -14,12 +14,12 @@ public class TestBug {
         DaoFactory daoFactory = DaoFactory.getInstance();
         FilmDAO filmDAO = daoFactory.getFilmDAO();
         Film mon_film = new Film(3,"blabla",15,"LILIAN","C:\\Projet_Java_ING3\\Matriximg.jpg");
-        Film mon_film2 = new Film(6,"bloublou",12,"LAlo","C:\\Projet_Java_ING3\\Matriximg.jpg");
+        //Film mon_film2 = new Film(6,"bloublou",12,"LAlo","C:\\Projet_Java_ING3\\Matriximg.jpg");
         filmDAO.ajouterFilm(mon_film);
-        filmDAO.ajouterFilm(mon_film2);
-        List<Film> film = new ArrayList<>();
-        film=filmDAO.getAllFilms();
-        /*Time heureDebut = new Time(10, 0, 0);
+        //filmDAO.ajouterFilm(mon_film2);
+        //List<Film> film = new ArrayList<>();
+        //film=filmDAO.getAllFilms();
+        Time heureDebut = new Time(10, 0, 0);
 // Créer une heure de fin (par exemple 12:30:00)
         Time heureFin = new Time(12, 30, 0);
         Time heureDebut2     = new Time(14, 0, 0);
@@ -31,10 +31,10 @@ public class TestBug {
         ProgrammationDAO programmationDAO = daoFactory.getProgrammationDAO();
         programmationDAO.ajouterProgrammation(ma_programmation);
         programmationDAO.ajouterProgrammation(ma_programmation2);
-        List<Programmation> programmations = new ArrayList<>();
-        programmations=programmationDAO.getProgrammationParIdFilm(3);
-        */for(int i= 0;i<film.size();i++){
-            System.out.println(film.get(i).getAuteur());
+        List<Time> horraires = new ArrayList<>();
+        horraires=programmationDAO.getHorairesParIdFilmEtDate(3, date1);
+        for(int i= 0;i<horraires.size();i++){
+            System.out.println(horraires.get(i)+"oui");
         }
     }
 }

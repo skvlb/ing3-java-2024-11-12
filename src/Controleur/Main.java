@@ -2,32 +2,23 @@ package Controleur;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
-import Vue.PageAccueil;
+import Vue.PagePrincipale;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Set the Nimbus Look and Feel
+        // Set the Nimbus Look and Feel for a better UI appearance
         setNimbusLookAndFeel();
 
-        // Create and set up the window.
-        JFrame frame = new JFrame("Gaumont Pathé de campagne");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Add main panel to the frame
-        frame.add(new PageAccueil());
-
-        // Set frame size
-        frame.setSize(1920, 1080);
-        
-        // Center the window on the screen
-        frame.setLocationRelativeTo(null);
-        
-        // Display the window
-        frame.setVisible(true);
+        // Create the main window of the application
+        PagePrincipale mainFrame = new PagePrincipale();  // PagePrincipale is a JFrame
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(1920, 1080);  // Set the size of the window
+        mainFrame.setLocationRelativeTo(null);  // Center the window on the screen
+        mainFrame.setVisible(true);  // Make the window visible
     }
 
+    // A helper method to set the Nimbus Look and Feel
     private static void setNimbusLookAndFeel() {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -37,6 +28,8 @@ public class Main {
                 }
             }
         } catch (Exception e) {
+            // Handle exception
+            System.err.println("Unable to set Nimbus Look and Feel");
             e.printStackTrace();
         }
     }

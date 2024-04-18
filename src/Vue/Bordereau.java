@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Controleur.ConnexionControleur;
 import Modele.DAO.DaoFactory;
 
 class Bordereau extends JPanel {
@@ -104,6 +105,7 @@ class Bordereau extends JPanel {
                 System.out.println("Recherche pour : " + champRecherche.getText());
             } else if (source == boutonCompte) {
                 PageConnexion pageConnexion = new PageConnexion();
+                ConnexionControleur controleur = new ConnexionControleur(pageConnexion, mainFrame);
                 mainFrame.changePanel(pageConnexion);
                 System.out.println("Le bouton 'Mon compte' a été cliqué");
             } else if (source == logoBouton) {

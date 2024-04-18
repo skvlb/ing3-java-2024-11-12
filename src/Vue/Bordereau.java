@@ -85,9 +85,8 @@ class Bordereau extends JPanel {
             JButton source = (JButton) e.getSource();
             if (source == boutonAffiche) {
                 System.out.println("Le bouton 'À l'affiche' a été cliqué");
-                System.out.println("Le bouton 'À l'affiche' a été cliqué");
                 DaoFactory daoFactory = DaoFactory.getInstance();
-                PageAffiche pageAffiche = new PageAffiche(daoFactory);
+                PageAffiche pageAffiche = new PageAffiche(daoFactory);                
                 mainFrame.changePanel(pageAffiche);
             } else if (source == boutonPanier) {
                 System.out.println("Le bouton 'Mon panier' a été cliqué");

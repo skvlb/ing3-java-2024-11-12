@@ -51,7 +51,16 @@ public class PageAffiche extends JPanel {
         filmButton.setContentAreaFilled(false);
         filmButton.setFocusPainted(false);
         filmButton.setToolTipText(film.getTitre() + ": " + film.getAuteur());  // Affiche les détails lors du survol
-        filmButton.addActionListener(e -> System.out.println("Film ID: " + film.getId() + " cliqué"));
+        
+        // Ajout de l'actionListener pour gérer le clic sur le bouton du film
+        filmButton.addActionListener(e -> {
+            // Récupérer l'ID du film sélectionné
+            int idFilm = film.getId();
+            // Passer à la page de sélection d'horaire avec l'ID du film en paramètre
+            PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
+            pagePrincipale.changePanel(new SelectionHoraire(idFilm));
+        });
+        
         filmPanel.add(filmButton);
 
         // Création et configuration de la zone de texte pour la description

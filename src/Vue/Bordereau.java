@@ -14,7 +14,7 @@ class Bordereau extends JPanel {
         this.mainFrame = mainFrame;
         setLayout(null); // Utilisation de null layout pour un positionnement libre
         setPreferredSize(new Dimension(1920, 175));
-        setBackground(new Color(0xFFEB62)); // Couleur de fond
+        setBackground(new Color(0xFFEB62)); // Couleur de fond jaune comme sur les wireframes
 
         // Création et positionnement du logo
         logoBouton = creerBoutonIcone("images/logo/logo gaumont.png", 140, 160);
@@ -51,7 +51,7 @@ class Bordereau extends JPanel {
         add(boutonCompte);
         add(champRecherche);
 
-        // Ajout des écouteurs d'événements après que tous les boutons ont été initialisés et ajoutés au panneau
+        
         addActionListeners();
     }
 

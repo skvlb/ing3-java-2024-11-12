@@ -1,8 +1,20 @@
 package Vue;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import Controleur.ConnexionControleur;
+import Modele.DAO.DaoFactory;
 
 class Bordereau extends JPanel {
     private PagePrincipale mainFrame;
@@ -14,7 +26,7 @@ class Bordereau extends JPanel {
         this.mainFrame = mainFrame;
         setLayout(null); // Utilisation de null layout pour un positionnement libre
         setPreferredSize(new Dimension(1920, 175));
-        setBackground(new Color(0xFFEB62)); // Couleur de fond jaune comme sur les wireframes
+        setBackground(new Color(0xFFEB62)); // Couleur de fond
 
         // Création et positionnement du logo
         logoBouton = creerBoutonIcone("images/logo/logo gaumont.png", 140, 160);
@@ -51,7 +63,7 @@ class Bordereau extends JPanel {
         add(boutonCompte);
         add(champRecherche);
 
-        
+        // Ajout des écouteurs d'événements après que tous les boutons ont été initialisés et ajoutés au panneau
         addActionListeners();
     }
 
@@ -78,13 +90,14 @@ class Bordereau extends JPanel {
         champ.setPreferredSize(new Dimension(200, 40));
     }
 
-    private void addActionListeners() {
+    private void addActionListeners() { // A DEPLACER 
         // Ici, on crée une seule instance d'ActionListener à réutiliser pour tous les boutons.
         ActionListener actionListener = e -> {
             JButton source = (JButton) e.getSource();
             if (source == boutonAffiche) {
                 System.out.println("Le bouton 'À l'affiche' a été cliqué");
-                PageAffiche pageAffiche = new PageAffiche();
+                DaoFactory daoFactory = DaoFactory.getInstance();
+                PageAffiche pageAffiche = new PageAffiche(daoFactory);
                 mainFrame.changePanel(pageAffiche);
             } else if (source == boutonPanier) {
                 System.out.println("Le bouton 'Mon panier' a été cliqué");
@@ -92,6 +105,7 @@ class Bordereau extends JPanel {
                 System.out.println("Recherche pour : " + champRecherche.getText());
             } else if (source == boutonCompte) {
                 PageConnexion pageConnexion = new PageConnexion();
+                ConnexionControleur controleur = new ConnexionControleur(pageConnexion, mainFrame);
                 mainFrame.changePanel(pageConnexion);
                 System.out.println("Le bouton 'Mon compte' a été cliqué");
             } else if (source == logoBouton) {

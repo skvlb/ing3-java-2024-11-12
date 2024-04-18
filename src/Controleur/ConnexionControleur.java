@@ -76,13 +76,5 @@ public class ConnexionControleur {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                PageConnexion view = new PageConnexion();
-                ConnexionControleur controller = new ConnexionControleur(view);
-                view.setVisible(true);
-            }
-        });
-    }
+
 }

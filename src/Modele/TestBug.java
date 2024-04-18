@@ -34,7 +34,7 @@ public class TestBug {
         List<Time> horraires = new ArrayList<>();
         horraires=programmationDAO.getHorairesParIdFilmEtDate(3, date1);
         for(int i= 0;i<horraires.size();i++){
-            System.out.println(horraires.get(i)+"oui");
+            System.out.println(horraires.get(i));
         }
     }
 }

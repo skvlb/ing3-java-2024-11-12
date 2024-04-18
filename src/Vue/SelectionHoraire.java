@@ -24,6 +24,7 @@ public class SelectionHoraire extends JPanel {
         
         setLayout(new BorderLayout(10, 0)); // Espacement horizontal entre les composants
         
+    
         // Panel de gauche pour l'affiche
         JPanel affichePanel = new JPanel(new BorderLayout());
         Film film = daoFactory.getFilmDAO().getFilmById(idFilm);
@@ -33,6 +34,10 @@ public class SelectionHoraire extends JPanel {
             afficheLabel = new JLabel(new ImageIcon(image));
         affichePanel.add(afficheLabel, BorderLayout.CENTER);
         affichePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Marge autour de l'affiche
+        
+        JLabel titrePage = new JLabel("La sélection du mois", SwingConstants.CENTER);
+        titrePage.setFont(new Font(titrePage.getFont().getName(), Font.BOLD, 24));
+        affichePanel.add(titrePage, BorderLayout.NORTH);
         
         // Panel de droite pour les horaires et la sélection de la date
         JPanel rightPanel = new JPanel();

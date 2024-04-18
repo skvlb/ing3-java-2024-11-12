@@ -1,10 +1,12 @@
 package Controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
-import java.util.Random;
-import Modele.*;
+
+import Modele.Client;
+import Modele.TypeClient;
 import Modele.DAO.DaoFactory;
 import Modele.DAO.UtilisateurDAO;
 import Vue.Page_Creation_utilisateur;

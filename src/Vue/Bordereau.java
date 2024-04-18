@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Modele.DAO.DaoFactory;
+
 class Bordereau extends JPanel {
     private PagePrincipale mainFrame;
     private JButton boutonAffiche, boutonPanier, boutonRecherche, boutonCompte, logoBouton;
@@ -93,7 +95,8 @@ class Bordereau extends JPanel {
             JButton source = (JButton) e.getSource();
             if (source == boutonAffiche) {
                 System.out.println("Le bouton 'À l'affiche' a été cliqué");
-                PageAffiche pageAffiche = new PageAffiche();
+                DaoFactory daoFactory = DaoFactory.getInstance();
+                PageAffiche pageAffiche = new PageAffiche(daoFactory);
                 mainFrame.changePanel(pageAffiche);
             } else if (source == boutonPanier) {
                 System.out.println("Le bouton 'Mon panier' a été cliqué");

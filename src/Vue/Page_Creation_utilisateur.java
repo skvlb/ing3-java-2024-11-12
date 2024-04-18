@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Page_Creation_utilisateur extends JPanel {
-    private BordereauConnexion bordereauConnexion; l
+    private BordereauConnexion bordereauConnexion; 
     private JTextField nomField;
     private JTextField prenomField;
     private JTextField emailField;

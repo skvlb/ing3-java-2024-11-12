@@ -1,6 +1,5 @@
 package Modele.DAO;
 import Modele.Programmation;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,5 +85,26 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             // Gérer les erreurs de connexion ou de requête SQL
         }
         return programmations;
-    }  }
+    }
+    public List<Time> getHorairesParIdFilmEtDate(int idFilm, Date date) {
+        List<Time> horaires = new ArrayList<>();
+        String query = "SELECT heure_debut FROM programmation " +
+                "WHERE film_id = ? AND date = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idFilm);
+            statement.setDate(2, date);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Time heureDebut = resultSet.getTime("heure_debut");
+                    horaires.add(heureDebut);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de connexion ou de requête SQL
+        }
+        return horaires;
+    }
+  }
 

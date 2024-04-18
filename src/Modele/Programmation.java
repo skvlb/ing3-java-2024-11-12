@@ -1,4 +1,5 @@
 package Modele;
+import java.sql.Date;
 import java.sql.Time;
 public class Programmation {
     private int id;
@@ -6,14 +7,16 @@ public class Programmation {
     private int salleId;
     private Time heureDebut;
     private Time heureFin;
+    private Date date;
 
     // Constructeur
-    public Programmation(int id,int filmId, int salleId,Time heureDebut,Time heureFin) {
+    public Programmation(int id,int filmId, int salleId,Time heureDebut,Time heureFin,Date date) {
         this.id=id;
         this.filmId = filmId;
         this.salleId = salleId;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
+        this.date=date;
     }
 
     // Getters et setters
@@ -57,4 +60,11 @@ public class Programmation {
         this.heureFin = heureFin;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

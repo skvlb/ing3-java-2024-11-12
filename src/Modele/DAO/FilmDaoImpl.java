@@ -1,7 +1,6 @@
 package Modele.DAO;
 import Modele.Film;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilmDaoImpl implements FilmDAO {

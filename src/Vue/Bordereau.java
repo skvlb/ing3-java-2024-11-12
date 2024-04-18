@@ -5,13 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 class Bordereau extends JPanel {
+    private PagePrincipale mainFrame;
     private JButton boutonAffiche, boutonPanier, boutonRecherche, boutonCompte, logoBouton;
     private JTextField champRecherche;
     private JLabel titre;
 
-    public Bordereau() {
+    public Bordereau(PagePrincipale mainFrame) {
+        this.mainFrame = mainFrame;
         setLayout(null); // Utilisation de null layout pour un positionnement libre
-        setPreferredSize(new Dimension(1920, 175)); 
+        setPreferredSize(new Dimension(1920, 175));
         setBackground(new Color(0xFFEB62)); // Couleur de fond
 
         // Création et positionnement du logo
@@ -49,7 +51,7 @@ class Bordereau extends JPanel {
         add(boutonCompte);
         add(champRecherche);
 
-        // Ajout des écouteurs d'événements
+        // Ajout des écouteurs d'événements après que tous les boutons ont été initialisés et ajoutés au panneau
         addActionListeners();
     }
 
@@ -77,10 +79,13 @@ class Bordereau extends JPanel {
     }
 
     private void addActionListeners() {
+        // Ici, on crée une seule instance d'ActionListener à réutiliser pour tous les boutons.
         ActionListener actionListener = e -> {
             JButton source = (JButton) e.getSource();
             if (source == boutonAffiche) {
                 System.out.println("Le bouton 'À l'affiche' a été cliqué");
+                PageAffiche pageAffiche = new PageAffiche();
+                mainFrame.changePanel(pageAffiche);
             } else if (source == boutonPanier) {
                 System.out.println("Le bouton 'Mon panier' a été cliqué");
             } else if (source == boutonRecherche) {
@@ -88,10 +93,12 @@ class Bordereau extends JPanel {
             } else if (source == boutonCompte) {
                 System.out.println("Le bouton 'Mon compte' a été cliqué");
             } else if (source == logoBouton) {
+                mainFrame.initializeCenterPanel();
                 System.out.println("Le logo/bouton a été cliqué");
             }
         };
 
+        // Associe l'actionListener à chaque bouton.
         boutonAffiche.addActionListener(actionListener);
         boutonPanier.addActionListener(actionListener);
         boutonRecherche.addActionListener(actionListener);

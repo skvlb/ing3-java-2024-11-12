@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import Modele.DAO.DaoFactory;
 import Modele.DAO.UtilisateurDAO;
 import Vue.PageConnexion;
+import Vue.Page_Creation_utilisateur;
 
 public class ConnexionControleur {
 
@@ -18,10 +19,27 @@ public class ConnexionControleur {
 
     public ConnexionControleur(PageConnexion pageConnexion) {
         this.pageConnexion = pageConnexion;
-        this.pageConnexion.setBoutonValiderListener(new BoutonCreationListener());
+        this.pageConnexion.setBoutonValiderListener(new BoutonValiderListener());
+        this.pageConnexion.setBoutonCreationListener(new BoutonCreationListener());
+
     }
 
+
+    // LISTENER ET AUTRE A VERIFIER 
+    
     class BoutonCreationListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println(("BOUTON CREATION COMPTE CLIQUe"));
+            Page_Creation_utilisateur pageCreationUtilisateur = new Page_Creation_utilisateur();
+            pageCreationUtilisateur.setVisible(true); 
+        }
+    }
+    
+    // JUSQUE ICI
+
+
+    class BoutonValiderListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Récupérer les valeurs des champs de texte
@@ -40,6 +58,8 @@ public class ConnexionControleur {
                 System.out.println("Mot de passe incorrect");
             }
         }
+
+        
     }
 
     // Méthode pour vérifier le mot de passe

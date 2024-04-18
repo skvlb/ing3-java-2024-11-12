@@ -1,8 +1,17 @@
 package Vue;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 class Bordereau extends JPanel {
     private PagePrincipale mainFrame;
@@ -78,7 +87,7 @@ class Bordereau extends JPanel {
         champ.setPreferredSize(new Dimension(200, 40));
     }
 
-    private void addActionListeners() {
+    private void addActionListeners() { // A DEPLACER 
         // Ici, on crée une seule instance d'ActionListener à réutiliser pour tous les boutons.
         ActionListener actionListener = e -> {
             JButton source = (JButton) e.getSource();

@@ -6,6 +6,8 @@ public class Salle {
     private int nombrePlaces;
     private int numero;
 
+    int siege [][];
+
     public Salle(int id, int capacite, int nombrePlaces, int numero) {
         this.id = id;
         this.capacite = capacite;

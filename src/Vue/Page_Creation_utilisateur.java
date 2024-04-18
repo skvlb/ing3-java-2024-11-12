@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Page_Creation_utilisateur extends JPanel {
-    private BordereauConnexion bordereauConnexion; l
     private JTextField nomField;
     private JTextField prenomField;
     private JTextField emailField;
@@ -16,10 +15,6 @@ public class Page_Creation_utilisateur extends JPanel {
     public Page_Creation_utilisateur() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 600)); 
-
-        // Création bordereau en haut 
-        bordereauConnexion = new BordereauConnexion();
-        add(bordereauConnexion, BorderLayout.NORTH);
 
         // Création panel pour le text (les champs à remplir)
         JPanel champsPanel = new JPanel(null);
@@ -52,7 +47,7 @@ public class Page_Creation_utilisateur extends JPanel {
         panel.add(txt);
     }
 
-    
+
     public String getNom() { return nomField.getText(); }
     public String getPrenom() { return prenomField.getText(); }
     public String getEmail() { return emailField.getText(); }

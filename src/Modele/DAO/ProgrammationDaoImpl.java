@@ -1,6 +1,5 @@
 package Modele.DAO;
 import Modele.Programmation;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +11,15 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
         this.daoFactory = daoFactory;
     }
     public void ajouterProgrammation(Programmation programmation) {
+        String query = "INSERT INTO programmation (id_programmation,film_id, salle_id, heure_debut, heure_fin, date) VALUES (?,?, ?, ?, ?, ?)";
         try (Connection connection = daoFactory.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO programmation (id_programmation,film_id, salle_id, heure_debut, heure_fin) VALUES (?, ?, ?, ?,?)", Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, programmation.getId());
             preparedStatement.setInt(2, programmation.getFilmId());
             preparedStatement.setInt(3, programmation.getSalleId());
             preparedStatement.setTime(4, programmation.getHeureDebut());
             preparedStatement.setTime(5, programmation.getHeureFin());
+            preparedStatement.setDate(6, programmation.getDate());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,8 +28,9 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
     }
 
     public void supprimerProgrammation(int programmationId) {
+        String query = "DELETE FROM programmation WHERE id_programmation = ?";
         try (Connection connection = daoFactory.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM programmation WHERE id_programmation = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, programmationId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -48,7 +50,8 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
                     int salleId = resultSet.getInt("salle_id");
                     Time heureDebut = resultSet.getTime("heure_debut");
                     Time heureFin = resultSet.getTime("heure_fin");
-                    Programmation programmation = new Programmation(id, idFilm, salleId, heureDebut, heureFin);
+                    Date date = resultSet.getDate("date");
+                    Programmation programmation = new Programmation(id, idFilm, salleId, heureDebut, heureFin, date);
                     programmations.add(programmation);
                 }
             }
@@ -59,27 +62,49 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
         return programmations;
     }
 
-public List<Programmation> getProgrammationParNomFilm(String nomFilm) {
-    List<Programmation> programmations = new ArrayList<>();
-    String query = "SELECT p.* FROM programmation p JOIN film f ON p.film_id = f.id_film WHERE f.titre = ?";
-    try (Connection connection = daoFactory.getConnection();
-         PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setString(1, nomFilm);
-        try (ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id_programmation");
-                int idFilm = resultSet.getInt("film_id");
-                int salleId = resultSet.getInt("salle_id");
-                Time heureDebut = resultSet.getTime("heure_debut");
-                Time heureFin = resultSet.getTime("heure_fin");
-                Programmation programmation = new Programmation(id, idFilm, salleId, heureDebut, heureFin);
-                programmations.add(programmation);
+    public List<Programmation> getProgrammationParNomFilm(String nomFilm) {
+        List<Programmation> programmations = new ArrayList<>();
+        String query = "SELECT p.* FROM programmation p JOIN film f ON p.film_id = f.id_film WHERE f.titre = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nomFilm);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id_programmation");
+                    int idFilm = resultSet.getInt("film_id");
+                    int salleId = resultSet.getInt("salle_id");
+                    Time heureDebut = resultSet.getTime("heure_debut");
+                    Time heureFin = resultSet.getTime("heure_fin");
+                    Date date = resultSet.getDate("date");
+                    Programmation programmation = new Programmation(id, idFilm, salleId, heureDebut, heureFin, date);
+                    programmations.add(programmation);
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de connexion ou de requête SQL
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Gérer les erreurs de connexion ou de requête SQL
+        return programmations;
     }
-    return programmations;
-}}
+    public List<Time> getHorairesParIdFilmEtDate(int idFilm, Date date) {
+        List<Time> horaires = new ArrayList<>();
+        String query = "SELECT heure_debut FROM programmation " +
+                "WHERE film_id = ? AND date = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idFilm);
+            statement.setDate(2, date);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Time heureDebut = resultSet.getTime("heure_debut");
+                    horaires.add(heureDebut);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de connexion ou de requête SQL
+        }
+        return horaires;
+    }
+  }
 

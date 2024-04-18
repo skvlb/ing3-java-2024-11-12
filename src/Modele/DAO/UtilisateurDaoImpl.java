@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import Modele.DAO.*;
 import Modele.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDAO{

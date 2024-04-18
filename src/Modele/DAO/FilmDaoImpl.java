@@ -1,8 +1,8 @@
 package Modele.DAO;
 import Modele.Film;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class FilmDaoImpl implements FilmDAO {
     private final DaoFactory daoFactory;
@@ -72,9 +72,27 @@ public class FilmDaoImpl implements FilmDAO {
 
     @Override
     public List<Film> getAllFilms() {
-        return null;
+        List<Film> films = new ArrayList<>();
+        String query = "SELECT id_film, titre, duree, auteur, image_path FROM film";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Film film = new Film(
+                    resultSet.getInt("id_film"),
+                    resultSet.getString("titre"),
+                    resultSet.getInt("duree"),
+                    resultSet.getString("auteur"),
+                    resultSet.getString("image_path")
+                );
+                films.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return films;
+    }
     }
 
-
-}
 

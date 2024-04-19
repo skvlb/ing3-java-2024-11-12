@@ -1,4 +1,5 @@
 package Controleur;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -18,16 +19,18 @@ public class CreationControleur {
 
     public CreationControleur(Page_Creation_utilisateur pageCreation) {
         this.pageCreation = pageCreation;
-        this.pageCreation.setBoutonValiderListener(new BoutonCreationListener());
+        this.pageCreation.setboutonValiderTestListener(new BoutonCreationListener());
     }
+    
 
     class BoutonCreationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("ActionListener activé"); // Log pour debug
-            String email = pageCreation.getEmail();
+            
             String nom = pageCreation.getNom();
             String prenom = pageCreation.getPrenom();
+            String email = pageCreation.getEmail();
             String telephone = pageCreation.getTelephone();
             String mdp = pageCreation.getMotDePasse();
             System.out.println("Données récupérées: " + email + ", " + nom + ", " + prenom); // Autre log pour debug
@@ -54,7 +57,11 @@ public class CreationControleur {
         SwingUtilities.invokeLater(() -> {
             Page_Creation_utilisateur view = new Page_Creation_utilisateur();
             CreationControleur controller = new CreationControleur(view);
+            //view.setboutonValiderTestListener(controller.new BoutonCreationListener());
+
             view.setVisible(true);
         });
-    } 
- }
+    }
+    
+    
+}

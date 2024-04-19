@@ -15,7 +15,7 @@ public class Page_Creation_utilisateur extends JPanel {
     private JLabel txtcreation, txtNom, txtPrenom, txtEmail, txtTelephone, txtMdp;
     private JTextField champNom, champPrenom, champEmail, champTelephone;
     private JPasswordField champMdp;
-    private JButton boutonValider;
+    private JButton boutonValiderTest;
 
     public Page_Creation_utilisateur() {
         setLayout(null);
@@ -122,10 +122,10 @@ public class Page_Creation_utilisateur extends JPanel {
         add(champMdp);
 
         // BOUTON VALIDER
-        boutonValider = new JButton("Valider");
-        personnaliserBouton(boutonValider);
-        boutonValider.setBounds(1000, 500, 200, heightBouton);
-        add(boutonValider);
+        boutonValiderTest = new JButton("Valider");
+        personnaliserBouton(boutonValiderTest);
+        boutonValiderTest.setBounds(1000, 500, 200, heightBouton);
+        add(boutonValiderTest);
     }
 
     private void personnaliserBouton(JButton bouton) {
@@ -134,18 +134,34 @@ public class Page_Creation_utilisateur extends JPanel {
         bouton.setPreferredSize(new Dimension(120, 60));
         bouton.setFocusPainted(false);
     }
-
-
-
-    /*
-    public String getNom() { return nomField.getText(); }
-    public String getPrenom() { return prenomField.getText(); }
-    public String getEmail() { return emailField.getText(); }
-    public String getTelephone() { return telephoneField.getText(); }
-    public String getMotDePasse() { return mdpField.getText(); }
-    */
     
-    public void setBoutonValiderListener(ActionListener listener) {
-        boutonValider.addActionListener(listener);
+
+
+    public String getNom() { 
+        System.out.println(champNom.getText());
+        return champNom.getText(); 
     }
+
+    public String getPrenom() { 
+        return champPrenom.getText(); 
+    }
+
+    public String getEmail() { 
+        return champEmail.getText(); 
+    }
+
+    public String getTelephone() { 
+        return champTelephone.getText(); 
+    }
+    
+    public String getMotDePasse() { 
+        return new String(champMdp.getPassword()); 
+    }
+    
+    
+    public void setboutonValiderTestListener(ActionListener listener) {
+        System.out.println("VALIDER PRESSE");
+        boutonValiderTest.addActionListener(listener);
+    }
+    
 }

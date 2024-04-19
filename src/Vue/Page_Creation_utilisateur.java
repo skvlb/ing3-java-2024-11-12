@@ -135,16 +135,20 @@ public class Page_Creation_utilisateur extends JPanel {
         bouton.setFocusPainted(false);
     }
 
-
-
-    /*
-    public String getNom() { return nomField.getText(); }
-    public String getPrenom() { return prenomField.getText(); }
-    public String getEmail() { return emailField.getText(); }
-    public String getTelephone() { return telephoneField.getText(); }
-    public String getMotDePasse() { return mdpField.getText(); }
-    */
+    public String getNom() { return champNom.getText(); }
+    public String getPrenom() { return champPrenom.getText(); }
+    public String getEmail() { return champEmail.getText(); }
+    public String getTelephone() { return champTelephone.getText(); }
+    public String getMotDePasse() { return new String(champMdp.getPassword()); }
     
+    public boolean areAllFieldsFilled() {
+        return !getNom().trim().isEmpty() &&
+               !getPrenom().trim().isEmpty() &&
+               !getEmail().trim().isEmpty() &&
+               !getTelephone().trim().isEmpty() &&
+               getMotDePasse().trim().length() > 0;
+    }
+
     public void setBoutonValiderListener(ActionListener listener) {
         boutonValider.addActionListener(listener);
     }

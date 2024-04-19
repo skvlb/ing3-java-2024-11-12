@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import Modele.DAO.DaoFactory;
 import Modele.DAO.UtilisateurDAO;
 import Vue.PageConnexion;
+import Vue.PageCreationProgrammation;
 import Vue.PagePrincipale;
 import Vue.Page_Creation_utilisateur;
 
@@ -56,6 +57,7 @@ public class ConnexionControleur {
             
             // Faire quelque chose en fonction du résultat
             if (motDePasseCorrect == true) {
+                String verif=null;
                 // Mot de passe correct, peut-être ouvrir une nouvelle fenêtre
                 utilisateurDAO.setConnection(email,true);
                 System.out.println("Vous êtes connecté");
@@ -63,6 +65,12 @@ public class ConnexionControleur {
                 mainFrame.invalidate(); // Invalidate the frame
                 mainFrame.validate();   // Validate the frame
                 mainFrame.repaint();    // Repaint the frame
+                verif=utilisateurDAO.getTypeUtilisateurParEmail(email);
+                System.out.println(verif);
+                if(verif.equals("employe")){
+                    System.out.println("Effectuer redirection vers Page Employe");
+                    
+                }
             } else {
                 // Mot de passe incorrect, afficher un message d'erreur par exemple
                 System.out.println("Mot de passe incorrect");

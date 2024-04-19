@@ -91,6 +91,25 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
             e.printStackTrace();
         }
     }
+    public String getTypeUtilisateurParEmail(String email) {
+        String typeUtilisateur = null;
+        String query = "SELECT type FROM utilisateur WHERE email = ?";
+        
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                typeUtilisateur = resultSet.getString("type");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return typeUtilisateur;
+    }
 
 }
 

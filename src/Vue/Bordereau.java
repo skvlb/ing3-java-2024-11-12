@@ -63,9 +63,8 @@ class Bordereau extends JPanel {
         lblUserEmail.setFont(new Font(lblUserEmail.getFont().getName(), Font.BOLD, 16));
         lblUserEmail.setForeground(Color.BLACK);
         lblUserEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblUserEmail.setBounds(1460, 130, 150, 30); // Position et taille
+        lblUserEmail.setBounds(1370, 130, 150, 30); // Position et taille
         add(lblUserEmail);
-
         add(boutonAffiche);
         add(boutonPanier);
         add(boutonRecherche);

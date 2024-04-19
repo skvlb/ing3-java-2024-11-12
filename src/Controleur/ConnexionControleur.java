@@ -80,7 +80,7 @@ public class ConnexionControleur {
             return false;
         }
         else{
-            return true;       
+            return true;
         }
     }
 

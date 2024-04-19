@@ -12,4 +12,5 @@ public interface FilmDAO {
         Film getFilmById(int id);
         List<Film> getAllFilms();
         public String rechercherFilmparNom(String nomFilm);
+        public int getIdFilmParTitre(String titre);
 }

@@ -112,6 +112,24 @@ public class FilmDaoImpl implements FilmDAO {
         }
         return films;
     }
+    public int getIdFilmParTitre(String titre) {
+        int idFilm = -1; // Valeur par défaut si aucun film trouvé
+        String query = "SELECT id_film FROM film WHERE titre = ?";
+
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, titre);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    idFilm = resultSet.getInt("id_film");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idFilm;
+    }
     }
 
 

@@ -11,6 +11,7 @@ import Vue.PageConnexion;
 import Vue.PageCreationProgrammation;
 import Vue.PagePrincipale;
 import Vue.Page_Creation_utilisateur;
+import Vue.PagePrincipaleAdmin;
 
 
 public class ConnexionControleur {
@@ -68,6 +69,9 @@ public class ConnexionControleur {
                 verif=utilisateurDAO.getTypeUtilisateurParEmail(email);
                 System.out.println(verif);
                 if(verif.equals("employe")){
+                    PagePrincipaleAdmin pagePrincipaleAdmin = new PagePrincipaleAdmin();
+                    mainFrame.dispose(); // Fermez la fenêtre de connexion / principale actuelle
+                    pagePrincipaleAdmin.setVisible(true); // Affichez la page d'administration
                     System.out.println("Effectuer redirection vers Page Employe");
                     
                 }

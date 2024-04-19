@@ -154,5 +154,6 @@ public class PageTarifsConnecte extends JPanel {
             frame.setVisible(true);
         });
     }
+    // TEST CHANGEMENT
     
 }

@@ -9,4 +9,5 @@ public interface UtilisateurDAO {
     public boolean verifierMotDePasse(String email, String motDePasse);
     public void supprimerUtilisateur(int idUtilisateur);
     public List<Utilisateur> listerUtilisateurs();
+    public void setConnection(String email, boolean isConnected);
 }

@@ -10,7 +10,6 @@ import java.util.List;
 public class PagePrincipale extends JFrame {
     private JPanel centerPanel;
     private DaoFactory daoFactory;
-
     public PagePrincipale() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,6 +85,11 @@ public class PagePrincipale extends JFrame {
         centerPanel.add(newPanel, BorderLayout.CENTER);
         centerPanel.revalidate();
         centerPanel.repaint();
+    }
+    public void setConnectedUserEmail(String email) {
+        Bordereau bordereau = (Bordereau) getContentPane().getComponent(0);
+        JLabel lblUserEmail = bordereau.getLblUserEmail();
+        lblUserEmail.setText(email);
     }
 }  
  

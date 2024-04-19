@@ -3,11 +3,13 @@ package Controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingUtilities;
+//import javax.swing.SwingUtilities;
 
 import Modele.DAO.DaoFactory;
 import Modele.DAO.UtilisateurDAO;
-import Vue.*;
+import Vue.PageConnexion;
+import Vue.PagePrincipale;
+import Vue.Page_Creation_utilisateur;
 
 
 public class ConnexionControleur {
@@ -55,7 +57,12 @@ public class ConnexionControleur {
             // Faire quelque chose en fonction du résultat
             if (motDePasseCorrect == true) {
                 // Mot de passe correct, peut-être ouvrir une nouvelle fenêtre
+                utilisateurDAO.setConnection(email,true);
                 System.out.println("Vous êtes connecté");
+                mainFrame.setConnectedUserEmail(email);
+                mainFrame.invalidate(); // Invalidate the frame
+                mainFrame.validate();   // Validate the frame
+                mainFrame.repaint();    // Repaint the frame
             } else {
                 // Mot de passe incorrect, afficher un message d'erreur par exemple
                 System.out.println("Mot de passe incorrect");

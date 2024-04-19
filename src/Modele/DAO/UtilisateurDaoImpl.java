@@ -80,6 +80,17 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
         }
         return utilisateurs;
     }
+    public void setConnection(String email, boolean isConnected) {
+        String query = "UPDATE utilisateur SET connection = ? WHERE email = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setBoolean(1, isConnected);
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

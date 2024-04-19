@@ -21,6 +21,7 @@ class Bordereau extends JPanel {
     private JButton boutonAffiche, boutonPanier, boutonRecherche, boutonCompte, logoBouton;
     private JTextField champRecherche;
     private JLabel titre;
+    private JLabel lblUserEmail; // Ajout du label pour afficher l'email de l'utilisateur
 
     public Bordereau(PagePrincipale mainFrame) {
         this.mainFrame = mainFrame;
@@ -56,6 +57,14 @@ class Bordereau extends JPanel {
         champRecherche = new JTextField("Saisir votre recherche", 20);
         personnaliserChampRecherche(champRecherche);
         champRecherche.setBounds(640, 75, 200, 40); // Position et taille
+
+        // Ajout du label lblUserEmail
+        lblUserEmail = new JLabel("User Email");
+        lblUserEmail.setFont(new Font(lblUserEmail.getFont().getName(), Font.BOLD, 16));
+        lblUserEmail.setForeground(Color.BLACK);
+        lblUserEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblUserEmail.setBounds(1460, 140, 150, 30); // Position et taille
+        add(lblUserEmail);
 
         add(boutonAffiche);
         add(boutonPanier);
@@ -120,5 +129,8 @@ class Bordereau extends JPanel {
         boutonRecherche.addActionListener(actionListener);
         boutonCompte.addActionListener(actionListener);
         logoBouton.addActionListener(actionListener);
+    }
+    public JLabel getLblUserEmail() {
+        return lblUserEmail;
     }
 }

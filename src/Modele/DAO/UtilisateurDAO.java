@@ -10,4 +10,5 @@ public interface UtilisateurDAO {
     public void supprimerUtilisateur(int idUtilisateur);
     public List<Utilisateur> listerUtilisateurs();
     public void setConnection(String email, boolean isConnected);
+    public String getTypeUtilisateurParEmail(String email);
 }

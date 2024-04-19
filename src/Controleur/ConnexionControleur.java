@@ -35,6 +35,7 @@ public class ConnexionControleur {
         @Override
         public void actionPerformed(ActionEvent e) {;
             Page_Creation_utilisateur pageCreationUtilisateur = new Page_Creation_utilisateur();
+            CreationControleur creationControleur = new CreationControleur(pageCreationUtilisateur);
             mainFrame.changePanel(pageCreationUtilisateur);
         }
     }

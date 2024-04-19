@@ -58,7 +58,7 @@ public class PageAffiche extends JPanel {
             int idFilm = film.getId();
             // Passer à la page de sélection d'horaire avec l'ID du film en paramètre
             PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
-            pagePrincipale.changePanel(new SelectionHoraire(idFilm));
+            pagePrincipale.changePanel(new SelectionHoraire(idFilm,daoFactory));
         });
         
         filmPanel.add(filmButton);

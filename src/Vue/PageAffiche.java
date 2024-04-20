@@ -1,11 +1,24 @@
 package Vue;
 
-import Modele.Film;
-import Modele.DAO.FilmDaoImpl;
-import Modele.DAO.DaoFactory;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+
+import Modele.Film;
+import Modele.DAO.DaoFactory;
+import Modele.DAO.FilmDaoImpl;
 
 public class PageAffiche extends JPanel {
     private JPanel panneauPrincipal;

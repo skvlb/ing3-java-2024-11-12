@@ -1,28 +1,32 @@
 package Vue;
 
 import javax.swing.*;
+
+import Modele.DAO.DaoFactory;
+import Modele.DAO.SiegeDAO;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectionSiege extends JPanel {
-    private static final int NOMBRE_SIEGES = 150; // Nouveau nombre de sièges
+    private static final int NOMBRE_SIEGES = 150;
     private static final int SIEGES_PAR_RANGE = 10;
 
     private ImageIcon iconeSiege;
     private ImageIcon iconeSiegeSelectionne;
-    private JButton siegeActuellementSelectionne; // Référence au siège actuellement sélectionné
+    private List<JButton> siegesSelectionnes = new ArrayList<>();
 
     public SelectionSiege() {
         setLayout(new BorderLayout());
-        JPanel panelSieges = new JPanel(new GridLayout(NOMBRE_SIEGES / SIEGES_PAR_RANGE, SIEGES_PAR_RANGE, 2, 2)); // Espacement réduit
+        JPanel panelSieges = new JPanel(new GridLayout(NOMBRE_SIEGES / SIEGES_PAR_RANGE, SIEGES_PAR_RANGE, 2, 2));
         panelSieges.setBackground(Color.LIGHT_GRAY);
 
-        // Charger les icônes ici
         iconeSiege = new ImageIcon("images/logo/siege.png");
         iconeSiege = new ImageIcon(iconeSiege.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
-        // Charger l'icône en noir et blanc pour le siège sélectionné
         iconeSiegeSelectionne = new ImageIcon("images/logo/siege2.png");
         iconeSiegeSelectionne = new ImageIcon(iconeSiegeSelectionne.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
@@ -35,13 +39,20 @@ public class SelectionSiege extends JPanel {
             boutonSiege.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (siegeActuellementSelectionne != null) {
-                        siegeActuellementSelectionne.setIcon(iconeSiege);
-                    }
                     JButton source = (JButton) e.getSource();
-                    source.setIcon(iconeSiegeSelectionne);
-                    siegeActuellementSelectionne = source; // Mettre à jour le siège actuellement sélectionné
-                    System.out.println("Siège sélectionné: " + e.getActionCommand());
+                    if (!siegesSelectionnes.contains(source)) {
+                        source.setIcon(iconeSiegeSelectionne);
+                        source.setEnabled(false);
+                        siegesSelectionnes.add(source);
+                        System.out.println("Siège sélectionné: " + e.getActionCommand());
+                        // Ajouter le siège à la base de données ici
+                        DaoFactory daoFactory= DaoFactory.getInstance();
+                        SiegeDAO siegeDAO = daoFactory.getSiegeDAO();
+                        String emailUtilisateur = "email@example.com";
+                        int idSalle = 1; // Exemple de l'identifiant de la salle
+                        int siegeId = Integer.parseInt(e.getActionCommand());
+                        siegeDAO.ajouterSiege(emailUtilisateur, siegeId, idSalle);
+                    }
                 }
             });
             panelSieges.add(boutonSiege);
@@ -51,8 +62,22 @@ public class SelectionSiege extends JPanel {
         ecranLabel.setFont(new Font(ecranLabel.getFont().getName(), Font.BOLD, 18));
         ecranLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
-        add(ecranLabel, BorderLayout.SOUTH);
+        add(ecranLabel, BorderLayout.NORTH);
         add(panelSieges, BorderLayout.CENTER);
+
+        // Ajouter le bouton pour accéder à la page des tarifs
+        JButton boutonPageTarif = new JButton("Voir les tarifs");
+        boutonPageTarif.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SelectionSiege.this);
+                PageTarifsConnecte pageTarifsConnecte = new PageTarifsConnecte();
+                frame.setContentPane(pageTarifsConnecte);
+                frame.revalidate();
+            }
+        });
+        add(boutonPageTarif, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {

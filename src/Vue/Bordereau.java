@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import Controleur.ConnexionControleur;
 import Modele.DAO.DaoFactory;
+import Modele.DAO.FilmDAO;
 
 class Bordereau extends JPanel {
     private PagePrincipale mainFrame;
@@ -111,6 +112,9 @@ class Bordereau extends JPanel {
                 System.out.println("Le bouton 'Mon panier' a été cliqué");
             } else if (source == boutonRecherche) {
                 System.out.println("Recherche pour : " + champRecherche.getText());
+                DaoFactory daoFactory = DaoFactory.getInstance();
+                FilmDAO filmDAO = daoFactory.getFilmDAO();
+                mainFrame.changePanel(new SelectionHoraire(filmDAO.getIdFilmParTitre(champRecherche.getText()), daoFactory));
             } else if (source == boutonCompte) {
                 PageConnexion pageConnexion = new PageConnexion();
                 ConnexionControleur controleur = new ConnexionControleur(pageConnexion, mainFrame);

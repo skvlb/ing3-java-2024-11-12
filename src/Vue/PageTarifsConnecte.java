@@ -42,6 +42,12 @@ public class PageTarifsConnecte extends JPanel {
         txtTarif.setFont(new Font("Arial", Font.BOLD, 20)); 
         txtTarif.setBounds(660, 50, 250, heightBouton);
         add(txtTarif);
+
+        // BOUTON Panier
+        boutonPanier = new JButton("Panier");
+        personnaliserBouton(boutonPanier);
+        boutonPanier.setBounds(50, 500, 200, heightBouton);
+        add(boutonPanier);
         
 
         // TXT ETUDIANT
@@ -98,11 +104,6 @@ public class PageTarifsConnecte extends JPanel {
         group.add(radioNormal);
         group.add(radioEnfant);
 
-        // BOUTON Panier
-        boutonPanier = new JButton("Ajouter au panier");
-        personnaliserBouton(boutonPanier);
-        boutonPanier.setBounds(1000, 500, 200, heightBouton);
-        add(boutonPanier);
 
         // A PARTIR D'ICI
         boutonPanier.addActionListener(new ActionListener() {
@@ -155,5 +156,4 @@ public class PageTarifsConnecte extends JPanel {
         });
     }
     // TEST CHANGEMENT
-    
 }

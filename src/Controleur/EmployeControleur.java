@@ -21,7 +21,7 @@ public class EmployeControleur {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
-
+        System.out.println("oui bien dans page prog");
         PageCreationProgrammation page = new PageCreationProgrammation();
         frame.add(page);
 

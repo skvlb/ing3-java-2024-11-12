@@ -15,7 +15,7 @@ public class TypeClientDaoImpl implements TypeClientDAO{
         this.daoFactory = daoFactory;
     }
     public void ajouterTypeClient(TypeClient typeClient) {
-        String query = "INSERT INTO type_client (id_type, description,reduction) VALUES (?, ?,?)";
+        String query = "INSERT INTO typeclient (id_type, description,reduction) VALUES (?, ?,?)";
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, typeClient.getId());
@@ -28,7 +28,7 @@ public class TypeClientDaoImpl implements TypeClientDAO{
     }
     public List<TypeClient> listerTypesClients() {
         List<TypeClient> typesClients = new ArrayList<>();
-        String query = "SELECT * FROM type_client";
+        String query = "SELECT * FROM typeclient";
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {

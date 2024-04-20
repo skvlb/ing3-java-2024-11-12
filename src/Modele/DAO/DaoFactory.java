@@ -48,5 +48,8 @@ public class DaoFactory {
     public TypeClientDAO getTypeClientDAO(){
         return new TypeClientDaoImpl(this);
     }
+    public ClientDAO getClientDAO(){
+        return new ClientDaoImpl(this);
+    }
 }
 

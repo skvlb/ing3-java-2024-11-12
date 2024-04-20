@@ -1,6 +1,6 @@
-    package Vue;
+package Vue;
 
-    import java.awt.Color;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JToggleButton;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SwingUtilities;
 
 import Modele.Film;
 import Modele.Programmation;
@@ -63,7 +64,7 @@ import Modele.DAO.DaoFactory;
             personnaliserBouton(btnValiderHoraire);
             btnValiderHoraire.addActionListener(e -> validerSelection());
 
-            btnValiderHoraire.setBounds(1180, 525, 120, 60);             // COO A CHANGER ICI
+            btnValiderHoraire.setBounds(1180, 525, 120, 60);             // CODE A CHANGER ICI
 
             
 
@@ -133,8 +134,6 @@ import Modele.DAO.DaoFactory;
         }
 
 
-
-
         private void personnaliserBouton(JButton bouton) {
             bouton.setForeground(Color.WHITE);
             bouton.setBackground(Color.BLACK);
@@ -180,7 +179,7 @@ import Modele.DAO.DaoFactory;
 
             for (Programmation programmation : programmations) {
                 JToggleButton horaireButton = new JToggleButton(String.format("%tR", programmation.getHeureDebut()));
-                horaireButton.setActionCommand(String.valueOf(programmation.getId())); // Stocke l'ID de programmation
+                horaireButton.setActionCommand(String.valueOf(programmation.getId())); //stockage id programmation
 
                 horaireButton.setBackground(Color.BLACK);
                 horaireButton.setForeground(Color.WHITE);
@@ -192,7 +191,7 @@ import Modele.DAO.DaoFactory;
                 buttonGroup.add(horaireButton);
                 horaireButton.addActionListener(e -> {
                     selectedButton = horaireButton;
-                    selectedProgrammation = programmation; // Mettre à jour la programmation sélectionnée
+                    selectedProgrammation = programmation; // mise a jour programmation
                     selectedButton.setSelected(true);
                 });
             }
@@ -205,12 +204,14 @@ import Modele.DAO.DaoFactory;
             if (selectedProgrammation != null) {
                 java.sql.Date selectedDate = new java.sql.Date(((Date) dateSpinner.getValue()).getTime());
                 Film film = daoFactory.getFilmDAO().getFilmById(idFilm);
-
                 System.out.println("Film sélectionné : " + film.getTitre());
                 System.out.println("ID du film : " + idFilm);
                 System.out.println("Date sélectionnée : " + selectedDate);
                 System.out.println("Horaire sélectionné : " + selectedProgrammation.getHeureDebut());
                 System.out.println("ID de la programmation : " + selectedProgrammation.getId());
+                PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
+                pagePrincipale.changePanel(new SelectionSiege(selectedProgrammation.getId(), daoFactory));
+
             } else {
                 System.out.println("Aucun horaire sélectionné.");
             }

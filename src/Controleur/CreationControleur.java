@@ -57,7 +57,6 @@ public class CreationControleur {
         SwingUtilities.invokeLater(() -> {
             Page_Creation_utilisateur view = new Page_Creation_utilisateur();
             CreationControleur controller = new CreationControleur(view);
-
             view.setVisible(true);
         });
     }

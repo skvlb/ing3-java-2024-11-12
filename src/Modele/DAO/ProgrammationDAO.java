@@ -9,5 +9,5 @@ public interface ProgrammationDAO {
     void supprimerProgrammation(int programmationId);
     public List<Programmation> getProgrammationParIdFilm(int idFilm);
     public List<Programmation> getProgrammationParNomFilm(String nomFilm);
-    public List<Programmation> getHorairesParIdFilmEtDate(int idFilm, Date date);
+    public List<Time> getHorairesParIdFilmEtDate(int idFilm, Date date);
 }

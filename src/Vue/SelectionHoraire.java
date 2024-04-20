@@ -4,7 +4,6 @@ import Modele.Film;
 import Modele.DAO.DaoFactory;
 import Modele.Programmation;
 import java.awt.*;
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

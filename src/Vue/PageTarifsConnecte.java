@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
-
 import Controleur.TarifsControleur;
 
 
@@ -23,13 +22,12 @@ public class PageTarifsConnecte extends JPanel {
     //private JTextField champNom, champPrenom, champEmail, champTelephone;
     private JRadioButton radioEtudiant, radioNormal, radioEnfant;
     private JButton boutonPanier;
+    private Bordereau bordereau;
 
     public PageTarifsConnecte() {
         setLayout(null);
         int heightBouton = 50;
         Color couleurDeFond = new Color(0xFFEB62); 
-
-
 
         //setPreferredSize(new Dimension(800, 600)); 
 
@@ -118,7 +116,8 @@ public class PageTarifsConnecte extends JPanel {
                 } else if (radioEnfant.isSelected()) {
                     selection = "Enfant";
                 }
-        
+                ///RECUPERER ID_PROGRAMMATION ET LE MAIL ET LES METTRES EN PARAMETRES DE LA METHODE CI DESSOUS
+                //CORRIGER LA METHODE ET ENLEVER LE Id_programmation d'exemple et le mail d'exemple
                 // Appel de la méthode dans le contrôleur pour traiter la sélection
                 TarifsControleur.traiterSelectionBoutonRadio(selection);
             }

@@ -38,7 +38,7 @@ public class TarifsControleur{
             for (Billet b : billets) {
                 daoFactory.getBilletDAO().ajouterBillet(b);
             }
-            // CHANGER DE PAGE (Page paiement)
+            
 
         }
         else{

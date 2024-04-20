@@ -1,8 +1,14 @@
 package Vue;
 
 import javax.swing.*;
+
+import Modele.DAO.FilmDAO;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import Modele.DAO.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class PageCreationProgrammation extends JPanel {
     private JLabel lblCreation, lblHeureDebut, lblHeureFin, lblDate, lblSalle;
@@ -53,7 +59,14 @@ public class PageCreationProgrammation extends JPanel {
         cbxSalles.setBounds(600, 450, 120, 25);
         add(cbxSalles);
 
-        String[] films = {"Avatar 2", "Dune 2", "Godzilla", "James Bond", "Le Mans 66", "OSS 117", "Rush", "SOS Fantômes", "Le Tour Montparnasse Infernal"};
+        FilmDAO filmDAO = DaoFactory.getInstance().getFilmDAO();
+        List<String> titres = new ArrayList<>();
+        titres=filmDAO.obtenirTitresDesFilms();
+        String[] tableau = new String[titres.size()];
+    
+    // Copier les éléments de la liste dans le tableau
+        titres.toArray(tableau);
+        String[] films = tableau;
         cbxFilms = new JComboBox<>(films);
         cbxFilms.setBounds(1000, 150, 200, 25);
         add(cbxFilms);

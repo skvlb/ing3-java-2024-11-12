@@ -1,14 +1,38 @@
 package Vue;
 
+<<<<<<< Updated upstream
 import Modele.Film;
 import Modele.DAO.DaoFactory;
 import Modele.Programmation;
 import java.awt.*;
+=======
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+>>>>>>> Stashed changes
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.swing.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SwingConstants;
+
+import Modele.Film;
+import Modele.DAO.DaoFactory;
 
 public class SelectionHoraire extends JPanel {
     private int idFilm;
@@ -46,7 +70,7 @@ public class SelectionHoraire extends JPanel {
         // Configuration du spinner de date
         dateSpinner = createDateSpinner();
         btnValiderDate = createValidateButton();
-
+        
         // Panneau pour le spinner de date et le bouton valider
         JPanel datePanel = new JPanel();
         datePanel.setLayout(new BoxLayout(datePanel, BoxLayout.LINE_AXIS));

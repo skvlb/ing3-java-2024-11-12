@@ -130,6 +130,26 @@ public class FilmDaoImpl implements FilmDAO {
 
         return idFilm;
     }
+    public List<String> obtenirTitresDesFilms() {
+        List<String> titres = new ArrayList<>();
+    
+        String query = "SELECT titre FROM film";
+    
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+    
+            while (resultSet.next()) {
+                titres.add(resultSet.getString("titre"));
+            }
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs de connexion ou de requête SQL
+        }
+    
+        return titres;
+    }
     }
 
 

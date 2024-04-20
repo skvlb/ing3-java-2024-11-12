@@ -86,25 +86,28 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
         }
         return programmations;
     }
-    public List<Time> getHorairesParIdFilmEtDate(int idFilm, Date date) {
-        List<Time> horaires = new ArrayList<>();
-        String query = "SELECT heure_debut FROM programmation " +
-                "WHERE film_id = ? AND date = ?";
+    public List<Programmation> getHorairesParIdFilmEtDate(int idFilm, Date date) {
+        List<Programmation> programmations = new ArrayList<>();
+        String query = "SELECT id_programmation, salle_id, heure_debut, heure_fin, date FROM programmation WHERE film_id = ? AND date = ?";
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, idFilm);
             statement.setDate(2, date);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
+                    int id = resultSet.getInt("id_programmation");
+                    int salleId = resultSet.getInt("salle_id");
                     Time heureDebut = resultSet.getTime("heure_debut");
-                    horaires.add(heureDebut);
+                    Time heureFin = resultSet.getTime("heure_fin");
+                    Programmation programmation = new Programmation(id, idFilm, salleId, heureDebut, heureFin, date);
+                    programmations.add(programmation);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Gérer les erreurs de connexion ou de requête SQL
         }
-        return horaires;
+        return programmations;
     }
   }
 

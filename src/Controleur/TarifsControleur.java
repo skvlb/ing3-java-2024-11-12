@@ -1,24 +1,19 @@
 package Controleur;
-
-import java.util.ArrayList;
+import Modele.*;
 import java.util.List;
-
-import Modele.TypeClient;
+import java.util.ArrayList;
 import Modele.DAO.DaoFactory;
-import Modele.DAO.TypeClientDAO;
-
-public class TarifsControleur {
+import Modele.DAO.UtilisateurDAO;
+import Modele.Billet;
+import java.util.Random;
+public class TarifsControleur{
     public static void traiterSelectionBoutonRadio(String selection) {
         DaoFactory daoFactory = DaoFactory.getInstance();
-        TypeClientDAO typeClientDao = daoFactory.getTypeClientDAO();
-        double prix = 10;
-        List <TypeClient> liste_types = new ArrayList();
-        liste_types=typeClientDao.listerTypesClients();//on liste tout les types disponibles de notre BDD
-        for(int i=0;i<liste_types.size();i++){
-            if(liste_types.get(i).getDescription().equals(selection)){//on regarde si un des types de la liste correspond à celui sélectionné
-                
-            }
-        }
+        UtilisateurDAO utilisateurDAO = daoFactory.getUtilisateurDAO();
+        double prix = 20;
+        String email="a";
+        int id = utilisateurDAO.getIdUtilisateurParEmail(email);
+        System.out.println("id utilisateur:"+id);
         if(!selection.equals("")){
             System.out.println("Sélection du bouton radio : " + selection);
             
@@ -31,10 +26,18 @@ public class TarifsControleur {
                 prix = prix * 0.5;
             }
             System.out.println(selection + "    :   " + prix);
-
-
-
-
+            // Création des billets
+            List<Billet> billets = new ArrayList<>();
+            int idProgrammation=4;//exemple mais on devra le récupérer des pages précèdente
+            // Exemple de création d'un billet avec la sélection comme type
+            Random random = new Random();
+            int id_billet = random.nextInt(10000) + 1;
+            Billet billet = new Billet(id_billet, id, idProgrammation, prix, false);
+            billets.add(billet);
+            // Ajout des billets à la base de données
+            for (Billet b : billets) {
+                daoFactory.getBilletDAO().ajouterBillet(b);
+            }
             // CHANGER DE PAGE (Page paiement)
 
         }

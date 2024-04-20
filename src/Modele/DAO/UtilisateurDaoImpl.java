@@ -110,6 +110,23 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
         
         return typeUtilisateur;
     }
+    public int getIdUtilisateurParEmail(String email) {
+        int idUtilisateur = -1; // Initialisation à une valeur par défaut au cas où aucun utilisateur n'est trouvé
+
+        String query = "SELECT id_utilisateur FROM utilisateur WHERE email = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    idUtilisateur = resultSet.getInt("id_utilisateur");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idUtilisateur;
+    }
 
 }
 

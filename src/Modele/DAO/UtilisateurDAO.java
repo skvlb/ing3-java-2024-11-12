@@ -11,4 +11,5 @@ public interface UtilisateurDAO {
     public List<Utilisateur> listerUtilisateurs();
     public void setConnection(String email, boolean isConnected);
     public String getTypeUtilisateurParEmail(String email);
+    public int getIdUtilisateurParEmail(String email);
 }

@@ -4,7 +4,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import Vue.PagePrincipale;
 import Controleur.EmployeControleur;
 import Vue.PageCreationProgrammation;
 
@@ -62,8 +62,14 @@ public class PagePrincipaleAdmin extends JFrame {
         boutonSupprimerProg.setBounds(710, 400, 250, 50);
         pagePrincipale.add(boutonSupprimerProg);
 
+
+        JButton boutonRetourAccueil = new JButton("Retour à l'accueil");
+        boutonRetourAccueil.setBounds(710, 500, 250, 50);
+        pagePrincipale.add(boutonRetourAccueil);
+
         boutonAjouterProg.addActionListener(e -> afficherAjouterProgrammation());
         boutonSupprimerProg.addActionListener(e -> afficherSupprimerProgrammation());
+        boutonRetourAccueil.addActionListener(e -> retourAccueil());
 
         changePanel(pagePrincipale);
     }
@@ -80,5 +86,11 @@ public class PagePrincipaleAdmin extends JFrame {
         getContentPane().add(panelCentral);
         getContentPane().revalidate();
         getContentPane().repaint();
+    }
+    private void retourAccueil() {
+
+        PagePrincipale pagePrincipale = new PagePrincipale();
+        // Fermer la page Admin
+        dispose();
     }
 }

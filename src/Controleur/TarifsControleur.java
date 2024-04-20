@@ -1,9 +1,12 @@
 package Controleur;
-import Modele.*;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import Modele.TypeClient;
 import Modele.DAO.DaoFactory;
 import Modele.DAO.TypeClientDAO;
+
 public class TarifsControleur {
     public static void traiterSelectionBoutonRadio(String selection) {
         DaoFactory daoFactory = DaoFactory.getInstance();

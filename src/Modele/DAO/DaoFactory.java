@@ -51,5 +51,8 @@ public class DaoFactory {
     public ClientDAO getClientDAO(){
         return new ClientDaoImpl(this);
     }
+    public SiegeDAO getSiegeDAO(){
+        return new SiegeDaoImpl(this);
+    }
 }
 

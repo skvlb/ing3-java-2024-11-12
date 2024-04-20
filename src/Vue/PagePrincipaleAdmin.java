@@ -81,6 +81,7 @@ public class PagePrincipaleAdmin extends JFrame {
         boutonAjouterProg.addActionListener(e -> afficherAjouterProgrammation());
         boutonSupprimerProg.addActionListener(e -> afficherSupprimerProgrammation());
         boutonRetourAccueil.addActionListener(e -> retourAccueil());
+        boutonRetourAccueil.addActionListener(e -> retourAccueil());
 
         changePanel(pagePrincipale);
     }

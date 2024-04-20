@@ -89,7 +89,7 @@ import Modele.DAO.DaoFactory;
 
             // Panneau pour le spinner de date et le bouton valider
             JPanel datePanel = new JPanel();
-            datePanel.setLayout(null);
+            datePanel.setLayout(null);  
 
             datePanel.setBackground(new Color(0xFFEB62));
             datePanel.setBounds(850,30,350,50);

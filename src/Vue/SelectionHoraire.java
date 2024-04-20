@@ -2,6 +2,7 @@ package Vue;
 
 import Modele.Film;
 import Modele.DAO.DaoFactory;
+import Modele.Programmation;
 import java.awt.*;
 import java.sql.Time;
 import java.util.Calendar;
@@ -17,9 +18,8 @@ public class SelectionHoraire extends JPanel {
     private JSpinner dateSpinner;
     private JButton btnValiderDate;
     private JButton btnValiderHoraire;
-    private List<Time> horaires;
+    private Programmation selectedProgrammation; // Nous allons stocker l'objet Programmation sélectionné
     private JToggleButton selectedButton;
-    private Time selectedTime;
 
     public SelectionHoraire(int idFilm, DaoFactory daoFactory) {
         this.idFilm = idFilm;
@@ -103,32 +103,27 @@ public class SelectionHoraire extends JPanel {
     }
 
     private void updateHoraires(java.sql.Date date) {
-        horaires = daoFactory.getProgrammationDAO().getHorairesParIdFilmEtDate(idFilm, date);
+        List<Programmation> programmations = daoFactory.getProgrammationDAO().getHorairesParIdFilmEtDate(idFilm, date);
         horairesPanel.removeAll();
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        for (Time horaire : horaires) {
-            JToggleButton horaireButton = new JToggleButton(String.format("%tR", horaire));
+        for (Programmation programmation : programmations) {
+            JToggleButton horaireButton = new JToggleButton(String.format("%tR", programmation.getHeureDebut()));
+            horaireButton.setActionCommand(String.valueOf(programmation.getId())); // Stocke l'ID de programmation
+
             horaireButton.setBackground(Color.BLACK);
             horaireButton.setForeground(Color.WHITE);
             horaireButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
             horaireButton.setFocusPainted(false);
             horaireButton.setFont(new Font("Arial", Font.BOLD, 16));
 
-            buttonGroup.add(horaireButton); // Ajouter le bouton au groupe
-
-            horaireButton.addActionListener(e -> {
-                if (selectedButton != null) {
-                    selectedButton.setSelected(false);
-                    selectedButton = null;
-                    selectedTime = null;
-                }
-                selectedButton = horaireButton;
-                selectedTime = horaire;
-                horaireButton.setSelected(true);
-            });
-
             horairesPanel.add(horaireButton);
+            buttonGroup.add(horaireButton);
+            horaireButton.addActionListener(e -> {
+                selectedButton = horaireButton;
+                selectedProgrammation = programmation; // Mettre à jour la programmation sélectionnée
+                selectedButton.setSelected(true);
+            });
         }
 
         horairesPanel.revalidate();
@@ -136,17 +131,15 @@ public class SelectionHoraire extends JPanel {
     }
 
     private void validerSelection() {
-        if (selectedTime != null) {
+        if (selectedProgrammation != null) {
             java.sql.Date selectedDate = new java.sql.Date(((Date) dateSpinner.getValue()).getTime());
             Film film = daoFactory.getFilmDAO().getFilmById(idFilm);
-            // Id de programmation à récupérer 
-            int idProgrammation = -1; // Exemple, voir avec Karl pour faire sa dans la DAO
 
             System.out.println("Film sélectionné : " + film.getTitre());
             System.out.println("ID du film : " + idFilm);
             System.out.println("Date sélectionnée : " + selectedDate);
-            System.out.println("Horaire sélectionné : " + selectedTime);
-            System.out.println("ID de la programmation : " + idProgrammation);
+            System.out.println("Horaire sélectionné : " + selectedProgrammation.getHeureDebut());
+            System.out.println("ID de la programmation : " + selectedProgrammation.getId());
         } else {
             System.out.println("Aucun horaire sélectionné.");
         }

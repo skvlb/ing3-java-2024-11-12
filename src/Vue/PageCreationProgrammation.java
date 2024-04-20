@@ -1,126 +1,91 @@
 package Vue;
 
-
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 
 public class PageCreationProgrammation extends JPanel {
-    private JLabel txtCreation, txtHeureDebut, txtHeureFin, labelDate, labelSalle;
-    private JTextField champDate, champHeureDebut, champHeureFin;
-    private JButton boutonValider;
-    private JComboBox<String> comboBoxSalles,comboBoxFilms;
+    private JLabel lblCreation, lblHeureDebut, lblHeureFin, lblDate, lblSalle;
+    private JTextField txtDate, txtHeureDebut, txtHeureFin;
+    private JButton btnValider;
+    private JComboBox<String> cbxSalles, cbxFilms;
 
     public PageCreationProgrammation() {
+        // Utilisation de null layout pour un positionnement manuel
         setLayout(null);
-        int heightBouton = 50;
-        Color couleurDeFond = new Color(0xFFEB62);
+        
+        // Initialisation des composants
+        lblCreation = new JLabel("Création d'une programmation");
+        lblCreation.setFont(new Font("Arial", Font.BOLD, 20));
+        lblCreation.setBounds(600, 50, 300, 30);
+        add(lblCreation);
 
-        // Label "Date"
-        labelDate = new JLabel("Date:");
-        labelDate.setOpaque(true);
-        labelDate.setBackground(couleurDeFond);
-        labelDate.setFont(new Font("Arial", Font.BOLD, 16));
-        labelDate.setBounds(500, 150, 100, heightBouton);
-        add(labelDate);
+        lblDate = new JLabel("Date:");
+        lblDate.setBounds(500, 150, 80, 25);
+        add(lblDate);
 
-        // Champ "Date"
-        champDate = new JTextField();
-        champDate.setBounds(600, 150, 150, heightBouton);
-        add(champDate);
+        txtDate = new JTextField();
+        txtDate.setBounds(600, 150, 120, 25);
+        add(txtDate);
 
-        // Texte "Création d'une programmation"
-        txtCreation = new JLabel("Création d'une programmation");
-        txtCreation.setFont(new Font("Arial", Font.BOLD, 20));
-        txtCreation.setBounds(600, 50, 300, heightBouton);
-        add(txtCreation);
+        lblHeureDebut = new JLabel("Heure de début:");
+        lblHeureDebut.setBounds(470, 250, 120, 25);
+        add(lblHeureDebut);
 
-        // Texte "Heure de début"
-        txtHeureDebut = new JLabel("Heure de début:");
-        txtHeureDebut.setOpaque(true);
-        txtHeureDebut.setBackground(couleurDeFond);
-        txtHeureDebut.setFont(new Font("Arial", Font.BOLD, 16));
-        txtHeureDebut.setBounds(470, 250, 150, heightBouton);
+        txtHeureDebut = new JTextField();
+        txtHeureDebut.setBounds(600, 250, 120, 25);
         add(txtHeureDebut);
 
-        // Champ "Heure de début"
-        champHeureDebut = new JTextField();
-        champHeureDebut.setOpaque(true);
-        champHeureDebut.setBackground(couleurDeFond);
-        champHeureDebut.setBounds(600, 250, 150, heightBouton);
-        add(champHeureDebut);
+        lblHeureFin = new JLabel("Heure de fin:");
+        lblHeureFin.setBounds(470, 350, 120, 25);
+        add(lblHeureFin);
 
-        // Texte "Heure de fin"
-        txtHeureFin = new JLabel("Heure de fin:");
-        txtHeureFin.setOpaque(true);
-        txtHeureFin.setBackground(couleurDeFond);
-        txtHeureFin.setFont(new Font("Arial", Font.BOLD, 16));
-        txtHeureFin.setBounds(470, 350, 150, heightBouton);
+        txtHeureFin = new JTextField();
+        txtHeureFin.setBounds(600, 350, 120, 25);
         add(txtHeureFin);
 
-        // Champ "Heure de fin"
-        champHeureFin = new JTextField();
-        champHeureFin.setOpaque(true);
-        champHeureFin.setBackground(couleurDeFond);
-        champHeureFin.setBounds(600, 350, 150, heightBouton);
-        add(champHeureFin);
+        lblSalle = new JLabel("Numéro de salle:");
+        lblSalle.setBounds(450, 450, 150, 25);
+        add(lblSalle);
 
-        // Label "Numéro de salle"
-        labelSalle = new JLabel("Numéro de salle:");
-        labelSalle.setOpaque(true);
-        labelSalle.setBackground(couleurDeFond);
-        labelSalle.setFont(new Font("Arial", Font.BOLD, 16));
-        labelSalle.setBounds(450, 450, 150, heightBouton);
-        add(labelSalle);
+        String[] salles = {"1", "2", "3", "4", "5"};
+        cbxSalles = new JComboBox<>(salles);
+        cbxSalles.setBounds(600, 450, 120, 25);
+        add(cbxSalles);
 
-        // Menu déroulant pour le numéro de salle
-        String[] numerosSalles = {"1", "2", "3", "4", "5"}; // Les numéros de salle disponibles
-        comboBoxSalles = new JComboBox<>(numerosSalles);
-        comboBoxSalles.setBounds(600, 450, 150, heightBouton);
-        add(comboBoxSalles);
+        String[] films = {"Avatar 2", "Dune 2", "Godzilla", "James Bond", "Le Mans 66", "OSS 117", "Rush", "SOS Fantômes", "Le Tour Montparnasse Infernal"};
+        cbxFilms = new JComboBox<>(films);
+        cbxFilms.setBounds(1000, 150, 200, 25);
+        add(cbxFilms);
 
-        // Liste des noms des films
-        String[] nomsFilms = {"Avatar 2", "Dune 2", "Godzilla", "James Bond", "Le Mans 66", "OSS 117", "Rush", "SOS Fantômes", "Le Tour Montparnasse Infernal"};
-        comboBoxFilms = new JComboBox<>(nomsFilms);
-        // Position et taille du menu déroulant
-        comboBoxFilms.setBounds(1000, 50, 200, 30);
-        add(comboBoxFilms);
-
-        // Bouton "Valider"
-        boutonValider = new JButton("Valider");
-        personnaliserBouton(boutonValider);
-        boutonValider.setBounds(850, 450, 120, heightBouton);
-        add(boutonValider);
-
+        btnValider = new JButton("Valider");
+        btnValider.setBounds(850, 450, 100, 30);
+        add(btnValider);
     }
 
-    private void personnaliserBouton(JButton bouton) {
-        bouton.setForeground(Color.WHITE);
-        bouton.setBackground(Color.BLACK);
-        bouton.setPreferredSize(new Dimension(120, 60));
-        bouton.setFocusPainted(false);
+    // Méthode pour attacher un ActionListener au bouton de validation
+    public void setValiderListener(ActionListener listener) {
+        btnValider.addActionListener(listener);
+    }
+
+    // Méthodes pour récupérer les données saisies
+    public String getDate() {
+        return txtDate.getText();
     }
 
     public String getHeureDebut() {
-        return champHeureDebut.getText();
+        return txtHeureDebut.getText();
     }
 
     public String getHeureFin() {
-        return champHeureFin.getText();
+        return txtHeureFin.getText();
     }
 
-    public String getDate() {
-        return champDate.getText();
+    public String getNomFilm() {
+        return (String) cbxFilms.getSelectedItem();
     }
 
     public String getNumeroSalle() {
-        return (String) comboBoxSalles.getSelectedItem();
-    }
-    public String getNomFilm() {
-        return (String) comboBoxFilms.getSelectedItem();
-    }
-
-    public void setValiderListener(ActionListener listener) {
-        boutonValider.addActionListener(listener);
+        return (String) cbxSalles.getSelectedItem();
     }
 }

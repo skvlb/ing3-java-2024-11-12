@@ -1,12 +1,15 @@
 package Vue;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controleur.EmployeControleur;
-import Vue.PageCreationProgrammation;
 
 public class PagePrincipaleAdmin extends JFrame {
     private BordereauAdmin bordereauAdmin;
@@ -54,18 +57,39 @@ public class PagePrincipaleAdmin extends JFrame {
         pagePrincipale.setBackground(new Color(0x123456));
         pagePrincipale.setBounds(0, 175, 1920, 905);
 
+        JLabel txtAction = new JLabel("Que voulez-vous faire? ");
+        txtAction.setFont(new Font("Arial", Font.BOLD, 20));
+        txtAction.setBounds(700, 150, 250, 60);
+        pagePrincipale.add(txtAction);
+
         JButton boutonAjouterProg = new JButton("Ajouter une programmation");
-        boutonAjouterProg.setBounds(710, 300, 250, 50);
+        personnaliserBouton(boutonAjouterProg);
+        boutonAjouterProg.setBounds(675, 250, 250, 60);
         pagePrincipale.add(boutonAjouterProg);
 
         JButton boutonSupprimerProg = new JButton("Supprimer une programmation");
-        boutonSupprimerProg.setBounds(710, 400, 250, 50);
+        personnaliserBouton(boutonSupprimerProg);
+        boutonSupprimerProg.setBounds(675, 350, 250, 60);
         pagePrincipale.add(boutonSupprimerProg);
+
+
+        JButton boutonRetourAccueil = new JButton("Retour à l'accueil");
+        personnaliserBouton(boutonRetourAccueil);
+        boutonRetourAccueil.setBounds(675, 450, 250, 60);
+        pagePrincipale.add(boutonRetourAccueil);
 
         boutonAjouterProg.addActionListener(e -> afficherAjouterProgrammation());
         boutonSupprimerProg.addActionListener(e -> afficherSupprimerProgrammation());
+        boutonRetourAccueil.addActionListener(e -> retourAccueil());
 
         changePanel(pagePrincipale);
+    }
+
+    private void personnaliserBouton(JButton bouton) {
+        bouton.setForeground(Color.WHITE);
+        bouton.setBackground(Color.BLACK);
+        bouton.setPreferredSize(new Dimension(120, 60));
+        bouton.setFocusPainted(false);
     }
 
     private void initializeCenterPanel() {
@@ -80,5 +104,11 @@ public class PagePrincipaleAdmin extends JFrame {
         getContentPane().add(panelCentral);
         getContentPane().revalidate();
         getContentPane().repaint();
+    }
+    private void retourAccueil() {
+
+        PagePrincipale pagePrincipale = new PagePrincipale();
+        // Fermer la page Admin
+        dispose();
     }
 }

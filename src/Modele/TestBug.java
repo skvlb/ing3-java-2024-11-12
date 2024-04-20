@@ -32,7 +32,7 @@ public class TestBug {
         programmationDAO.ajouterProgrammation(ma_programmation);
         programmationDAO.ajouterProgrammation(ma_programmation2);
         List<Time> horraires = new ArrayList<>();
-        horraires=programmationDAO.getHorairesParIdFilmEtDate(3, date1);
+        //horraires=programmationDAO.getHorairesParIdFilmEtDate(3, date1);
         for(int i= 0;i<horraires.size();i++){
             System.out.println(horraires.get(i));
         }

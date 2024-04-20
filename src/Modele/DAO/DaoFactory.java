@@ -45,5 +45,8 @@ public class DaoFactory {
     public UtilisateurDAO getUtilisateurDAO(){
         return new UtilisateurDaoImpl(this);
     }
+    public TypeClientDAO getTypeClientDAO(){
+        return new TypeClientDaoImpl(this);
+    }
 }
 

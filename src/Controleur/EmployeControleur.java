@@ -28,6 +28,7 @@ public class EmployeControleur {
         page.setValiderListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("Fonction ajout");
                 DaoFactory daoFactory = DaoFactory.getInstance();
                 String heureDebut = page.getHeureDebut();
                 String heureFin = page.getHeureFin();

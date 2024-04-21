@@ -39,7 +39,6 @@ public class TarifsControleur{
                 daoFactory.getBilletDAO().ajouterBillet(b);
             }
             
-
         }
         else{
             // Rien Faire

@@ -32,6 +32,11 @@ public class Programmation {
         return filmId;
     }
 
+    public int GetFilmNom()
+    {
+        return 0; //a faire pour avoir le nom plutot que l'id dans la panier
+    }
+
     public void setFilmId(int filmId) {
         this.filmId = filmId;
     }

@@ -10,4 +10,5 @@ public interface ProgrammationDAO {
     public List<Programmation> getProgrammationParIdFilm(int idFilm);
     public List<Programmation> getProgrammationParNomFilm(String nomFilm);
     public List<Programmation> getHorairesParIdFilmEtDate(int idFilm, Date date);//commentaire push
+    public Programmation getProgrammationParId(int idProgrammation);
 }

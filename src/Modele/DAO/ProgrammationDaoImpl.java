@@ -116,4 +116,26 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
         }
         return programmations;
     }
+    public Programmation getProgrammationParId(int idProgrammation) {
+        String query = "SELECT * FROM programmation WHERE id_programmation = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idProgrammation);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int filmId = resultSet.getInt("film_id");
+                    int salleId = resultSet.getInt("salle_id");
+                    Time heureDebut = resultSet.getTime("heure_debut");
+                    Time heureFin = resultSet.getTime("heure_fin");
+                    Date date = resultSet.getDate("date");
+                    return new Programmation(idProgrammation, filmId, salleId, heureDebut, heureFin, date);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
   }

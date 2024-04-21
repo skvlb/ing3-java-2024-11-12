@@ -24,19 +24,18 @@ public class PagePrincipaleAdmin extends JFrame {
         setLayout(null);
         getContentPane().setBackground(new Color(0x123456));
 
-        // Bordereau pour l'administrateur
+        // Bordereau admin
         bordereauAdmin = new BordereauAdmin(this);
         bordereauAdmin.setBounds(0, 0, 1920, 175);
         add(bordereauAdmin);
 
-        // Panneau central où les autres panneaux seront affichés
         panelCentral = new JPanel();
         panelCentral.setBounds(0, 175, 1920, 905);
         panelCentral.setBackground(new Color(0x123456));
         panelCentral.setLayout(null);
         add(panelCentral);
 
-        initializeCenterPanel(); // Appel initial pour configurer le panel central
+        initializeCenterPanel(); 
     }
 
     private void afficherAjouterProgrammation() {
@@ -48,7 +47,6 @@ public class PagePrincipaleAdmin extends JFrame {
 
     private void afficherSupprimerProgrammation() {
         System.out.println("Affichage de la page pour supprimer une programmation");
-        // Ici, vous pourriez créer et afficher une page pour supprimer une programmation
     }
 
     public void afficherPagePrincipale() {
@@ -94,8 +92,8 @@ public class PagePrincipaleAdmin extends JFrame {
     }
 
     private void initializeCenterPanel() {
-        panelCentral.removeAll(); // Nettoyer le panel pour éviter des doublons
-        afficherPagePrincipale(); // Utilisez cette méthode pour réinitialiser le contenu central
+        panelCentral.removeAll(); 
+        afficherPagePrincipale();
     }
 
     public void changePanel(JPanel newPanel) {

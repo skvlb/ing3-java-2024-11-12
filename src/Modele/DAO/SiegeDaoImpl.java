@@ -23,7 +23,6 @@ public class SiegeDaoImpl implements SiegeDAO{
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les exceptions
         }
     }
 
@@ -38,7 +37,6 @@ public class SiegeDaoImpl implements SiegeDAO{
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les exceptions
         }
     }
     public List<Integer> listerPlacesPrises(int idSalle) {
@@ -56,7 +54,6 @@ public class SiegeDaoImpl implements SiegeDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les exceptions
         }
 
         return placesPrises;

@@ -49,7 +49,6 @@ public class FilmDaoImpl implements FilmDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
         return resultatRecherche;
     }
@@ -113,7 +112,7 @@ public class FilmDaoImpl implements FilmDAO {
         return films;
     }
     public int getIdFilmParTitre(String titre) {
-        int idFilm = -1; // Valeur par défaut si aucun film trouvé
+        int idFilm = -1; // valeur par defaut
         String query = "SELECT id_film FROM film WHERE titre = ?";
 
         try (Connection connection = daoFactory.getConnection();
@@ -145,7 +144,6 @@ public class FilmDaoImpl implements FilmDAO {
     
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
     
         return titres;

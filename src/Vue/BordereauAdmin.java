@@ -15,7 +15,7 @@ class BordereauAdmin extends JPanel {
     private PagePrincipaleAdmin mainFrame;
     private JButton boutonCompte, logoBouton;
     private JLabel titre;
-    private JLabel lblUserEmail; // Label pour afficher l'email de l'utilisateur
+    private JLabel lblUserEmail; 
 
     public BordereauAdmin(PagePrincipaleAdmin mainFrame) {
         this.mainFrame = mainFrame;
@@ -69,7 +69,7 @@ class BordereauAdmin extends JPanel {
         });
         
         boutonCompte.addActionListener(e -> {
-            // Code pour rediriger vers la page de compte de l'administrateur
+            // code pour rediriger vers la page de compte de l'administrateur
             System.out.println("Le bouton 'Mon compte' a été cliqué");
         });
     }

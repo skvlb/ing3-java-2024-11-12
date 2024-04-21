@@ -19,6 +19,9 @@ public class Billet {
         return id_billet;
     }
 
+    public void setId_billet(int id_billet) {
+        this.id_billet = id_billet;
+    }
 
     public int getId_client() {
         return id_client;

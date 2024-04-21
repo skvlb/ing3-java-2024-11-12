@@ -22,11 +22,6 @@ public class Page_Creation_utilisateur extends JPanel {
         int heightBouton = 50;
         Color couleurDeFond = new Color(0xFFEB62); 
 
-
-
-        //setPreferredSize(new Dimension(800, 600)); 
-
-        // Création panel pour le text (les champs à remplir)
         JPanel champsPanel = new JPanel(null);
         champsPanel.setPreferredSize(new Dimension(800, 450));
 

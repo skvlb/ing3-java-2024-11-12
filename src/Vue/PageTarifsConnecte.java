@@ -12,20 +12,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import Controleur.TarifsControleur;
+import Modele.Billet;
+import Modele.DAO.DaoFactory;
+import Modele.DAO.UtilisateurDaoImpl;
 
 public class PageTarifsConnecte extends JPanel {
-    private JLabel txtTarif, txtEtudiant, txtNormal, txtEnfant;
+    private JLabel txtTarif;
     private JRadioButton radioEtudiant, radioNormal, radioEnfant;
     private JButton boutonPanier;
     private int idProgrammation;
     private int siegeNumero;
     private String userEmail;
+    private PagePrincipale mainFrame; 
 
     public PageTarifsConnecte(int idProgrammation, int siegeNumero, String userEmail) {
         this.idProgrammation = idProgrammation;
         this.siegeNumero = siegeNumero;
         this.userEmail = userEmail;
+        this.mainFrame = mainFrame;
         setLayout(null);
         initializeUI();
     }
@@ -42,20 +46,17 @@ public class PageTarifsConnecte extends JPanel {
         panelTarifs.setBackground(new Color(0xFF00FF));
 
 
-        // Acheter un billet - label
         txtTarif = new JLabel("Acheter un billet");
         txtTarif.setFont(new Font("Arial", Font.BOLD, 24));
         txtTarif.setBounds(150, 10, 200, 30);
         panelTarifs.add(txtTarif);
 
-        // Bouton Panier
         boutonPanier = new JButton("Ajouter au panier");
         personnaliserBouton(boutonPanier, 150, 400, 200, 50);
         panelTarifs.add(boutonPanier);
 
         setupTarifOptions(panelTarifs);
 
-        // Grouping radio buttons to allow only one selection
         ButtonGroup tarifGroup = new ButtonGroup();
         tarifGroup.add(radioEtudiant);
         tarifGroup.add(radioNormal);
@@ -88,22 +89,19 @@ public class PageTarifsConnecte extends JPanel {
 
         return radioButton;
     }
-
-
-
+    
     private void actionBoutonPanier(ActionEvent e) {
-        try {
-            String selectedTarif = getSelectedTarif();  // Assurez-vous que cette méthode renvoie une chaîne non vide correctement
-            if (!selectedTarif.isEmpty()) {
-                System.out.println("Tarif sélectionné: " + selectedTarif + ", ID Programmation: " + idProgrammation + ", Siège N°: " + siegeNumero + ", Utilisateur: " + userEmail);
-                TarifsControleur.traiterSelectionTarif(selectedTarif, idProgrammation, siegeNumero, userEmail);
-                JOptionPane.showMessageDialog(this, "Tarif " + selectedTarif + " ajouté pour le siège " + siegeNumero);
-            } else {
-                JOptionPane.showMessageDialog(this, "Veuillez sélectionner un tarif.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout du tarif: " + ex.getMessage(), "Erreur Système", JOptionPane.ERROR_MESSAGE);
+        String selectedTarif = getSelectedTarif();
+        if (!selectedTarif.isEmpty()) {
+            double prix = calculatePrice(selectedTarif);
+            PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
+            UtilisateurDaoImpl utilisateurDao = new UtilisateurDaoImpl(pagePrincipale.getDaoFactory());
+            int userId = utilisateurDao.getIdUtilisateurParEmail(userEmail);
+            Billet billet = new Billet(0, userId, idProgrammation, prix, false);
+            DaoFactory daoFactory = pagePrincipale.getDaoFactory();
+            pagePrincipale.changePanel(new PanierPage(billet,daoFactory,siegeNumero)); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner un tarif.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -121,5 +119,12 @@ public class PageTarifsConnecte extends JPanel {
         bouton.setFocusPainted(false);
     }
 
-
+    private double calculatePrice(String tarif) {
+        switch (tarif) {
+            case "Etudiant": return 8.50;
+            case "Normal": return 12.00;
+            case "Enfant": return 6.50;
+            default: return 15.00;
+        }
+    }
 }

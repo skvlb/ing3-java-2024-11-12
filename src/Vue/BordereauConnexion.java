@@ -14,14 +14,12 @@ public class BordereauConnexion extends JPanel {
 
     public BordereauConnexion(){
         Color couleurDeFond = new Color(0xFFEB62); 
-        //setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10)); 
         setLayout(null);
         setBackground(couleurDeFond); 
-        //setPreferredSize(new Dimension(100, 150));
 
         titrePage = new JLabel("GAUMONT Pathé de campagne"); 
         titrePage.setFont(new Font("Arial", Font.BOLD, 30)); 
-        titrePage.setBounds(640, 30, 500, 50); // Position et dimension du label
+        titrePage.setBounds(640, 30, 500, 50); 
 
         // A remplacer par une photo maison 
         boutonRetourAccueil = new JButton("Accueil"); 

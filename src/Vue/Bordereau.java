@@ -22,11 +22,11 @@ class Bordereau extends JPanel {
     private JButton boutonAffiche, boutonPanier, boutonRecherche, boutonCompte, logoBouton;
     private JTextField champRecherche;
     private JLabel titre;
-    private JLabel lblUserEmail; // Ajout du label pour afficher l'email de l'utilisateur
+    private JLabel lblUserEmail;
 
     public Bordereau(PagePrincipale mainFrame) {
         this.mainFrame = mainFrame;
-        setLayout(null); // Utilisation de null layout pour un positionnement libre
+        setLayout(null); 
         setPreferredSize(new Dimension(1920, 175));
         setBackground(new Color(0xFFEB62)); // Couleur de fond
 
@@ -38,28 +38,25 @@ class Bordereau extends JPanel {
         // Création et positionnement du titre
         titre = new JLabel("GAUMONT Pathé de campagne", SwingConstants.CENTER);
         titre.setFont(new Font(titre.getFont().getName(), Font.BOLD, 24));
-        titre.setBounds(555, 10, 400, 30); // Position et taille
+        titre.setBounds(555, 10, 400, 30); 
         add(titre);
 
         // Création et positionnement des boutons et du champ de recherche
         boutonAffiche = new JButton("À l'affiche");
         personnaliserBouton(boutonAffiche);
-        boutonAffiche.setBounds(500, 75, 120, 40); // Position et taille
+        boutonAffiche.setBounds(500, 75, 120, 40); 
         
         boutonPanier = creerBoutonIcone("images/logo/panier.png", 70, 40);
-        boutonPanier.setBounds(935, 75, 70, 40); // Position et taille
+        boutonPanier.setBounds(935, 75, 70, 40); 
         
         boutonRecherche = creerBoutonIcone("images/logo/loupe.png", 70, 40);
-        boutonRecherche.setBounds(845, 75, 70, 40); // Position et taille
+        boutonRecherche.setBounds(845, 75, 70, 40);
         
         boutonCompte = creerBoutonIcone("images/logo/moncompte.png", 50, 40);
-        boutonCompte.setBounds(1460, 75, 50, 40); // Position et taille
-        
+        boutonCompte.setBounds(1460, 75, 50, 40); 
         champRecherche = new JTextField("Saisir votre recherche", 20);
         personnaliserChampRecherche(champRecherche);
-        champRecherche.setBounds(640, 75, 200, 40); // Position et taille
-
-        // Ajout du label lblUserEmail
+        champRecherche.setBounds(640, 75, 200, 40); 
         lblUserEmail = new JLabel("User Email");
         lblUserEmail.setFont(new Font(lblUserEmail.getFont().getName(), Font.BOLD, 16));
         lblUserEmail.setForeground(Color.BLACK);
@@ -72,7 +69,6 @@ class Bordereau extends JPanel {
         add(boutonCompte);
         add(champRecherche);
 
-        // Ajout des écouteurs d'événements après que tous les boutons ont été initialisés et ajoutés au panneau
         addActionListeners();
     }
 
@@ -126,7 +122,6 @@ class Bordereau extends JPanel {
             }
         };
 
-        // Associe l'actionListener à chaque bouton.
         boutonAffiche.addActionListener(actionListener);
         boutonPanier.addActionListener(actionListener);
         boutonRecherche.addActionListener(actionListener);

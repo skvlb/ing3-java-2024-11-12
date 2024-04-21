@@ -55,10 +55,10 @@ public class EmployeControleur {
             Programmation programmation = new Programmation(id, id_film, salle_id, heureDebutSQL, heureFinSQL, dateSQL);
             DaoFactory.getInstance().getProgrammationDAO().ajouterProgrammation(programmation);
 
-            // Affichage du message pop-up
+            // aaffichage du message pop-up
             JOptionPane.showMessageDialog(null, "Programmation ajoutée avec succès!");
         } catch (ParseException ex) {
-            // Affichage du message pop-up en cas d'erreur
+            // affichage du message pop-up en cas d'erreur
             JOptionPane.showMessageDialog(null, "Erreur lors du parsing de la date: " + ex.getMessage(), "Erreur de Parsing", JOptionPane.ERROR_MESSAGE);
         }
     }

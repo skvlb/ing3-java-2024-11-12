@@ -49,23 +49,22 @@ public class ConnexionControleur {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Bouton Valider cliqué");
-            // Récupérer les valeurs des champs de texte
             String email = pageConnexion.getEmail();
             String motDePasse = pageConnexion.getMotDePasse();
 
-            // Appeler votre méthode de vérification de mot de passe
+            //vérification de mot de passe
             boolean motDePasseCorrect = verifierMotDePasse(email, motDePasse);
             
-            // Faire quelque chose en fonction du résultat
+            
             if (motDePasseCorrect == true) {
                 String verif=null;
-                // Mot de passe correct, peut-être ouvrir une nouvelle fenêtre
+                // si mdp correct
                 utilisateurDAO.setConnection(email,true);
                 System.out.println("Vous êtes connecté");
                 mainFrame.setConnectedUserEmail(email);
-                mainFrame.invalidate(); // Invalidate the frame
-                mainFrame.validate();   // Validate the frame
-                mainFrame.repaint();    // Repaint the frame
+                mainFrame.invalidate(); 
+                mainFrame.validate();   
+                mainFrame.repaint();    
                 verif=utilisateurDAO.getTypeUtilisateurParEmail(email);
                 System.out.println(verif);
                 if(verif.equals("employe")){
@@ -86,7 +85,7 @@ public class ConnexionControleur {
         
     }
 
-    // Méthode pour vérifier le mot de passe
+    // méthode pour checker mdp
     private boolean verifierMotDePasse(String email, String motDePasse) {
         
         boolean u = utilisateurDAO.verifierMotDePasse(email, motDePasse);

@@ -1,56 +1,60 @@
 package Vue;
 
 import Modele.Billet;
-
+import Modele.Programmation;
+import Modele.DAO.BilletDaoImpl;
+import Modele.DAO.DaoFactory;
+import Modele.DAO.ProgrammationDaoImpl;
+import Modele.DAO.UtilisateurDaoImpl;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
-public class PanierPage extends JDialog {
-
-    public PanierPage(JFrame parent, Billet billet) {
-        super(parent, "Panier", true); // true rend la fenêtre modale
-
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(null);
-        contentPanel.setBackground(Color.WHITE);
-        contentPanel.setPreferredSize(new Dimension(300, 200));
-        add(contentPanel);
-
-        // Label ID Client
-        JLabel labelIdClient = new JLabel("ID Client: " + billet.getId_client());
-        labelIdClient.setBounds(10, 10, 200, 20);
-        contentPanel.add(labelIdClient);
-
-        // Label ID Programmation
-        JLabel labelIdProgrammation = new JLabel("ID Programmation: " + billet.getId_programmation());
-        labelIdProgrammation.setBounds(10, 40, 200, 20);
-        contentPanel.add(labelIdProgrammation);
-
-        // Label Prix
-        JLabel labelPrix = new JLabel("Prix: " + billet.getPrix() + " EUR");
-        labelPrix.setBounds(10, 70, 200, 20);
-        contentPanel.add(labelPrix);
-
-        // Bouton pour valider l'achat
-        JButton validerAchatButton = new JButton("Valider l'achat");
-        validerAchatButton.setBounds(70, 120, 150, 30);
-        contentPanel.add(validerAchatButton);
-
-        pack(); // Ajuste automatiquement la taille de la fenêtre en fonction des composants
-        setLocationRelativeTo(parent); // Centre la fenêtre par rapport à la fenêtre parente
+public class PanierPage extends JPanel {
+    private DaoFactory daoFactory;
+    private int siegeNumero;
+    public PanierPage(Billet billet, DaoFactory daoFactory,int siegeNumero) {
+        this.daoFactory = daoFactory;
+        this.siegeNumero = siegeNumero;
+        setupUI(billet);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Billet billet = new Billet(123, 456, 20,12, false);
-            JFrame parentFrame = new JFrame();
-            parentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            parentFrame.setSize(400, 400);
-            parentFrame.setLocationRelativeTo(null);
-            parentFrame.setVisible(true);
+    private void setupUI(Billet billet) {
+        setLayout(new GridLayout(7, 1, 10, 10)); 
+        setBackground(Color.WHITE);
+        
+        //  UtilisateurDao pour récupérer l'email de l'utilisateur via son ID
+        UtilisateurDaoImpl utilisateurDao = new UtilisateurDaoImpl(daoFactory);
+        String email = utilisateurDao.getEmailUtilisateurParId(billet.getId_client());
+        
+        //ProgrammationDao pour récupérer les détails de la programmation
+        ProgrammationDaoImpl programmationDao = new ProgrammationDaoImpl(daoFactory);
+        Programmation programmation = programmationDao.getProgrammationParId(billet.getId_programmation());
+        
+        add(new JLabel("Email Client: " + email));
+        add(new JLabel("Film: " + programmation.getFilmId())); 
+        add(new JLabel("Date: " + programmation.getDate().toString()));
+        add(new JLabel("Heure de début: " + programmation.getHeureDebut().toString()));
+        add(new JLabel("Salle: " + programmation.getSalleId()));
+        add(new JLabel("Siège N°: " + siegeNumero)); 
+        add(new JLabel("Prix: " + billet.getPrix() + " EUR"));
 
-            PanierPage popup = new PanierPage(parentFrame, billet);
-            popup.setVisible(true);
-        });
+        JButton validerAchatButton = new JButton("Valider l'achat");
+        validerAchatButton.addActionListener(e -> validerAchat(billet));
+        add(validerAchatButton);
+    }
+
+    private void validerAchat(Billet billet) {
+        int randomBilletId = genererIdBilletAleatoire();
+        billet.setId_billet(randomBilletId);
+        BilletDaoImpl billetDao = new BilletDaoImpl(daoFactory);
+        billetDao.ajouterBillet(billet);
+        JOptionPane.showMessageDialog(this, "Achat validé ");
+    }
+
+    private int genererIdBilletAleatoire() {
+        Random rand = new Random();
+        int randomId = rand.nextInt(Integer.MAX_VALUE);
+        return randomId;
     }
 }

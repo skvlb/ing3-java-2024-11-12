@@ -39,10 +39,21 @@ public class TarifsControleur{
                 daoFactory.getBilletDAO().ajouterBillet(b);
             }
             
-
         }
         else{
             // Rien Faire
         }
+    }
+
+    public static void traiterSelectionTarif(String tarif, int idProgrammation, int siegeNumero, String userEmail) {
+        // Logique pour traiter le tarif sélectionné
+        System.out.println("Traitement du tarif: " + tarif + " pour la programmation ID: " + idProgrammation +
+                           ", siège numéro: " + siegeNumero + ", utilisateur: " + userEmail);
+        ajouterAuPanier(tarif, idProgrammation, siegeNumero, userEmail);
+    }
+
+    private static void ajouterAuPanier(String tarif, int idProgrammation, int siegeNumero, String userEmail) {
+        // Logique d'ajout au panier
+        System.out.println("Ajout au panier: " + tarif + ", pour le siège: " + siegeNumero);
     }
 }

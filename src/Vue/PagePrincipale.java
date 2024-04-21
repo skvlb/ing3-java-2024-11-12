@@ -91,5 +91,11 @@ public class PagePrincipale extends JFrame {
         JLabel lblUserEmail = bordereau.getLblUserEmail();
         lblUserEmail.setText(email);
     }
+
+    public String getConnectedUserEmail() {
+        Bordereau bordereau = (Bordereau) getContentPane().getComponent(0);
+        return bordereau.getLblUserEmail().getText();
+    }
+    
 }  
  

@@ -26,7 +26,7 @@ public class BilletDaoImpl implements BilletDAO{
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
+            
         }
     }
 
@@ -59,7 +59,6 @@ public class BilletDaoImpl implements BilletDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
         return billets;
     }

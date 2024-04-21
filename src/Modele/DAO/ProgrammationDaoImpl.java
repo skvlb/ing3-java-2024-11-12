@@ -30,7 +30,6 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
     }
 
@@ -42,7 +41,6 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
     }
     public List<Programmation> getProgrammationParIdFilm(int idFilm) {
@@ -64,7 +62,6 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
         return programmations;
     }
@@ -89,7 +86,6 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
         return programmations;
     }
@@ -112,7 +108,6 @@ public class ProgrammationDaoImpl implements ProgrammationDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
         return programmations;
     }

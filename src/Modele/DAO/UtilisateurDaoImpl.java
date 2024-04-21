@@ -26,9 +26,8 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs de connexion ou de requête SQL
         }
-        return false; // En cas d'erreur ou si l'e-mail n'existe pas dans la base de données
+        return false; // si l'e-mail n'existe pas dans la base de données
     }
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         String query = "INSERT INTO utilisateur (id_utilisateur,nom, prenom, email, mot_de_passe, telephone, type) VALUES (?,?, ?, ?, ?, ?, ?)";
@@ -111,7 +110,7 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
         return typeUtilisateur;
     }
     public int getIdUtilisateurParEmail(String email) {
-        int idUtilisateur = -1; // Initialisation à une valeur par défaut au cas où aucun utilisateur n'est trouvé
+        int idUtilisateur = -1; // valeur par defaut
 
         String query = "SELECT id_utilisateur FROM utilisateur WHERE email = ?";
         try (Connection connection = daoFactory.getConnection();

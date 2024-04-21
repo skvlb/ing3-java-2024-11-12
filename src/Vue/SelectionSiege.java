@@ -1,21 +1,9 @@
 package Vue;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import Modele.DAO.DaoFactory;
 import Modele.DAO.SiegeDaoImpl;
 
@@ -72,17 +60,8 @@ public class SelectionSiege extends JPanel {
         add(panelSieges, BorderLayout.CENTER);
 
         JButton btnValider = new JButton("Valider");
-        personnaliserBouton(btnValider);
         btnValider.addActionListener(this::validerSiege);
         add(btnValider, BorderLayout.NORTH);
-    }
-
-    
-    private void personnaliserBouton(JButton bouton) {
-        bouton.setForeground(Color.WHITE);
-        bouton.setBackground(Color.BLACK);
-        bouton.setPreferredSize(new Dimension(120, 60));
-        bouton.setFocusPainted(false);
     }
 
     private ImageIcon createIcon(String path) {

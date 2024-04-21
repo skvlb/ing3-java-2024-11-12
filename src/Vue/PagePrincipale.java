@@ -1,22 +1,11 @@
 package Vue;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import Modele.Film;
-import Modele.DAO.DaoFactory;
 import Modele.DAO.FilmDaoImpl;
+import Modele.DAO.DaoFactory;
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 public class PagePrincipale extends JFrame {
     private JPanel centerPanel;

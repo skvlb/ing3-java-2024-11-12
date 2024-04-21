@@ -210,7 +210,7 @@ import Modele.DAO.DaoFactory;
                 System.out.println("Horaire sélectionné : " + selectedProgrammation.getHeureDebut());
                 System.out.println("ID de la programmation : " + selectedProgrammation.getId());
                 PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
-                pagePrincipale.changePanel(new SelectionSiege(selectedProgrammation.getId(), daoFactory));
+                pagePrincipale.changePanel(new SelectionSiege(selectedProgrammation.getId(), daoFactory,pagePrincipale));
 
             } else {
                 System.out.println("Aucun horaire sélectionné.");

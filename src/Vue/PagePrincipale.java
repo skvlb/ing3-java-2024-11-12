@@ -32,6 +32,10 @@ public class PagePrincipale extends JFrame {
         setVisible(true);
     }
 
+    public DaoFactory getDaoFactory() {
+        return this.daoFactory;
+    }
+
     public void initializeCenterPanel() {
         FilmDaoImpl filmDao = new FilmDaoImpl(daoFactory);
         List<Film> films = filmDao.getAllFilms();

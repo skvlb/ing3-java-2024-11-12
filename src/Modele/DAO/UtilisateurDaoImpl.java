@@ -128,5 +128,21 @@ public class UtilisateurDaoImpl implements UtilisateurDAO{
         return idUtilisateur;
     }
 
+    public String getEmailUtilisateurParId(int idUtilisateur) {
+        String email = null;
+        String query = "SELECT email FROM utilisateur WHERE id_utilisateur = ?";
+        try (Connection connection = daoFactory.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idUtilisateur);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    email = resultSet.getString("email");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return email;
+    }
 }
 

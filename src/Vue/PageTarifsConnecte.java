@@ -4,30 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-=======
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-
->>>>>>> f31b830d87ffb4cbf2729627d57b4d5239dfc890
 import Controleur.TarifsControleur;
 
 public class PageTarifsConnecte extends JPanel {
     private JLabel txtTarif, txtEtudiant, txtNormal, txtEnfant;
     private JRadioButton radioEtudiant, radioNormal, radioEnfant;
     private JButton boutonPanier;
-<<<<<<< HEAD
     private int idProgrammation;
     private int siegeNumero;
     private String userEmail;
-=======
->>>>>>> f31b830d87ffb4cbf2729627d57b4d5239dfc890
 
     public PageTarifsConnecte(int idProgrammation, int siegeNumero, String userEmail) {
         this.idProgrammation = idProgrammation;
@@ -37,12 +22,9 @@ public class PageTarifsConnecte extends JPanel {
         initializeUI();
     }
 
-<<<<<<< HEAD
     private void initializeUI() {
         setBackground(new Color(0xFFEB62));
         setPreferredSize(new Dimension(800, 600));
-=======
->>>>>>> f31b830d87ffb4cbf2729627d57b4d5239dfc890
 
         // Acheter un billet - label
         txtTarif = new JLabel("Acheter un billet");
@@ -63,76 +45,7 @@ public class PageTarifsConnecte extends JPanel {
         tarifGroup.add(radioNormal);
         tarifGroup.add(radioEnfant);
 
-<<<<<<< HEAD
         boutonPanier.addActionListener(this::actionBoutonPanier);
-=======
-        // BOUTON RADIO ETUDIANT
-        radioEtudiant = new JRadioButton();
-        radioEtudiant.setBackground(couleurDeFond);
-        radioEtudiant.setBounds(780, 150, 50, heightBouton);
-        add(radioEtudiant);
-
- 
-        // TXT NORMAL
-        txtNormal = new JLabel(" Normal ");
-
-        txtNormal.setOpaque(true);
-        txtNormal.setBackground(couleurDeFond);
-        txtNormal.setFont(new Font("Arial", Font.BOLD, 16)); 
-        txtNormal.setBounds(640, 225, 140, heightBouton);
-        add(txtNormal);
-
-        // BOUTON RADIO NORMAL
-        radioNormal = new JRadioButton();
-        radioNormal.setBackground(couleurDeFond);
-        radioNormal.setBounds(780, 225, 50, heightBouton);
-        add(radioNormal);
-
-
-
-        // TXT ENFANT
-        txtEnfant = new JLabel(" Enfant ");
-
-        txtEnfant.setOpaque(true);
-        txtEnfant.setBackground(couleurDeFond);
-        txtEnfant.setFont(new Font("Arial", Font.BOLD, 16)); 
-        txtEnfant.setBounds(640, 300, 140, heightBouton);
-        add(txtEnfant);
-
-        // BOUTON RADIO ENFANT
-        radioEnfant = new JRadioButton();
-        radioEnfant.setBackground(couleurDeFond);
-        radioEnfant.setBounds(780, 300, 50, heightBouton);
-        add(radioEnfant);
-
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(radioEtudiant);
-        group.add(radioNormal);
-        group.add(radioEnfant);
-
-
-        // A PARTIR D'ICI
-        boutonPanier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Ton code pour gérer l'événement ici
-                String selection = "";
-                if (radioEtudiant.isSelected()) {
-                    selection = "Etudiant";
-                } else if (radioNormal.isSelected()) {
-                    selection = "Normal";
-                } else if (radioEnfant.isSelected()) {
-                    selection = "Enfant";
-                }
-                ///RECUPERER ID_PROGRAMMATION ET LE MAIL ET LES METTRES EN PARAMETRES DE LA METHODE CI DESSOUS
-                //CORRIGER LA METHODE ET ENLEVER LE Id_programmation d'exemple et le mail d'exemple
-                // Appel de la méthode dans le contrôleur pour traiter la sélection
-                
-                TarifsControleur.traiterSelectionBoutonRadio(selection);
-            }
-        });
->>>>>>> f31b830d87ffb4cbf2729627d57b4d5239dfc890
     }
 
     private void setupTarifOptions() {
@@ -157,13 +70,21 @@ public class PageTarifsConnecte extends JPanel {
         return radioButton;
     }
 
+
+
     private void actionBoutonPanier(ActionEvent e) {
-        String selectedTarif = getSelectedTarif();
-        if (!selectedTarif.isEmpty()) {
-            TarifsControleur.traiterSelectionTarif(selectedTarif, idProgrammation, siegeNumero, userEmail);
-            JOptionPane.showMessageDialog(this, "Tarif " + selectedTarif + " ajouté pour le siège " + siegeNumero);
-        } else {
-            JOptionPane.showMessageDialog(this, "Veuillez sélectionner un tarif.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        try {
+            String selectedTarif = getSelectedTarif();  // Assurez-vous que cette méthode renvoie une chaîne non vide correctement
+            if (!selectedTarif.isEmpty()) {
+                System.out.println("Tarif sélectionné: " + selectedTarif + ", ID Programmation: " + idProgrammation + ", Siège N°: " + siegeNumero + ", Utilisateur: " + userEmail);
+                TarifsControleur.traiterSelectionTarif(selectedTarif, idProgrammation, siegeNumero, userEmail);
+                JOptionPane.showMessageDialog(this, "Tarif " + selectedTarif + " ajouté pour le siège " + siegeNumero);
+            } else {
+                JOptionPane.showMessageDialog(this, "Veuillez sélectionner un tarif.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout du tarif: " + ex.getMessage(), "Erreur Système", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -180,4 +101,6 @@ public class PageTarifsConnecte extends JPanel {
         bouton.setBackground(Color.BLACK);
         bouton.setFocusPainted(false);
     }
+
+
 }

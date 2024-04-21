@@ -1,12 +1,21 @@
 package Vue;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import Controleur.TarifsControleur;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
+
 import Modele.Billet;
-import Modele.DAO.UtilisateurDaoImpl;
 import Modele.DAO.DaoFactory;
+import Modele.DAO.UtilisateurDaoImpl;
 
 public class PageTarifsConnecte extends JPanel {
     private JLabel txtTarif;
@@ -27,19 +36,29 @@ public class PageTarifsConnecte extends JPanel {
     }
 
     private void initializeUI() {
-        setBackground(new Color(0xFFEB62));
+        setBackground(new Color(0xD7D9DF));
         setPreferredSize(new Dimension(800, 600));
+
+
+
+        JPanel paneltarif = new JPanel(); 
+        paneltarif.setLayout(null);
+        paneltarif.setBackground(new Color(0xFF0000));  //FFEB62
+        paneltarif.setBounds(500,20,500,625);
+
+
+
 
         txtTarif = new JLabel("Acheter un billet");
         txtTarif.setFont(new Font("Arial", Font.BOLD, 24));
-        txtTarif.setBounds(300, 20, 200, 30);
-        add(txtTarif);
+        txtTarif.setBounds(150, 20, 200, 30);
+        paneltarif.add(txtTarif);
 
         boutonPanier = new JButton("Ajouter au panier");
-        personnaliserBouton(boutonPanier, 300, 450, 200, 50);
-        add(boutonPanier);
+        personnaliserBouton(boutonPanier, 150, 450, 200, 50);
+        paneltarif.add(boutonPanier);
 
-        setupTarifOptions();
+        setupTarifOptions(paneltarif);
 
         ButtonGroup tarifGroup = new ButtonGroup();
         tarifGroup.add(radioEtudiant);
@@ -47,26 +66,28 @@ public class PageTarifsConnecte extends JPanel {
         tarifGroup.add(radioEnfant);
 
         boutonPanier.addActionListener(this::actionBoutonPanier);
+
+        add(paneltarif);
     }
 
-    private void setupTarifOptions() {
+    private void setupTarifOptions(JPanel paneltarif) {
         int baseY = 100;
         int stepY = 75;
-        radioEtudiant = createRadioOption("Etudiant", baseY);
-        radioNormal = createRadioOption("Normal", baseY + stepY);
-        radioEnfant = createRadioOption("Enfant", baseY + 2 * stepY);
+        radioEtudiant = createRadioOption(paneltarif,"Etudiant", baseY);
+        radioNormal = createRadioOption(paneltarif, "Normal", baseY + stepY);
+        radioEnfant = createRadioOption(paneltarif, "Enfant", baseY + 2 * stepY);
     }
 
-    private JRadioButton createRadioOption(String label, int yPos) {
+    private JRadioButton createRadioOption(JPanel paneltarif, String label, int yPos) {
         JLabel labelOption = new JLabel(label);
         labelOption.setFont(new Font("Arial", Font.BOLD, 16));
-        labelOption.setBounds(280, yPos, 120, 30);
-        add(labelOption);
+        labelOption.setBounds(125, yPos, 120, 30);
+        paneltarif.add(labelOption);
 
         JRadioButton radioButton = new JRadioButton();
         radioButton.setBackground(new Color(0xFFEB62));
         radioButton.setBounds(400, yPos, 30, 30);
-        add(radioButton);
+        paneltarif.add(radioButton);
 
         return radioButton;
     }

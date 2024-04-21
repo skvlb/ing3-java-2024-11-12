@@ -185,6 +185,9 @@ public class PageCreationProgrammation extends JPanel {
         bouton.setPreferredSize(new Dimension(120, 60));
         bouton.setFocusPainted(false);
     }
+
+
+    
     public void setValiderListener(ActionListener listener) {
         btnValider.addActionListener(listener);
     }

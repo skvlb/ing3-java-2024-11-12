@@ -1,19 +1,19 @@
 package Controleur;
 
-import Modele.DAO.DaoFactory;
-import Modele.DAO.FilmDAO;
-import Modele.DAO.ProgrammationDAO;
-import Modele.Programmation;
-import Vue.PageCreationProgrammation;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Time;
-import java.sql.Date;
-import javax.swing.JOptionPane;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import Modele.Programmation;
+import Modele.DAO.DaoFactory;
+import Modele.DAO.FilmDAO;
+import Vue.PageCreationProgrammation;
 
 public class EmployeControleur {
     private PageCreationProgrammation page;
@@ -47,7 +47,7 @@ public class EmployeControleur {
 
             int salle_id = Integer.parseInt(page.getNumeroSalle());
             Random random = new Random();
-            int id = random.nextInt(10000) + 1;
+            int id = random.nextInt(100,10000) + 1;
 
             FilmDAO filmDAO = DaoFactory.getInstance().getFilmDAO();
             int id_film = filmDAO.getIdFilmParTitre(page.getNomFilm());

@@ -36,7 +36,6 @@ public class PageAffiche extends JPanel {
         setLayout(new BorderLayout());
         setBackground(Color.LIGHT_GRAY);
 
-        // Création du panneau principal pour l'affichage des films
         panneauPrincipal = new JPanel();
         panneauPrincipal.setLayout(new BoxLayout(panneauPrincipal, BoxLayout.Y_AXIS));
         List<Film> films = filmDao.getAllFilms();
@@ -45,7 +44,6 @@ public class PageAffiche extends JPanel {
             panneauPrincipal.add(createFilmPanel(film));
         }
 
-        // Création d'un JScrollPane pour gérer les défilements
         defilement = new JScrollPane(panneauPrincipal);
         defilement.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         defilement.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -57,7 +55,6 @@ public class PageAffiche extends JPanel {
         filmPanel.setLayout(new BoxLayout(filmPanel, BoxLayout.X_AXIS));
         filmPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Création et redimensionnement de l'icône de l'affiche du film
         ImageIcon icon = new ImageIcon(new ImageIcon(film.getImagePath()).getImage().getScaledInstance(150, 225, Image.SCALE_SMOOTH));
         JButton filmButton = new JButton(icon);
         filmButton.setBorderPainted(false);
@@ -65,18 +62,16 @@ public class PageAffiche extends JPanel {
         filmButton.setFocusPainted(false);
         filmButton.setToolTipText(film.getTitre() + ": " + film.getAuteur());  // Affiche les détails lors du survol
         
-        // Ajout de l'actionListener pour gérer le clic sur le bouton du film
         filmButton.addActionListener(e -> {
             // Récupérer l'ID du film sélectionné
             int idFilm = film.getId();
-            // Passer à la page de sélection d'horaire avec l'ID du film en paramètre
+            // passer à la page de sélection d'horaire avec l'ID du film en paramètre
             PagePrincipale pagePrincipale = (PagePrincipale) SwingUtilities.getWindowAncestor(this);
             pagePrincipale.changePanel(new SelectionHoraire(idFilm,daoFactory));
         });
         
         filmPanel.add(filmButton);
-
-        // Création et configuration de la zone de texte pour la description
+        
         JTextArea descriptionText = new JTextArea(film.getTitre() + ": " + film.getAuteur());
         descriptionText.setLineWrap(true);
         descriptionText.setWrapStyleWord(true);

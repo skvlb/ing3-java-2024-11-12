@@ -49,15 +49,11 @@ import Modele.DAO.DaoFactory;
             rightPanel.setBounds(10,10,1510,625);
             
 
-            // Panneau pour l'affiche du film
             JPanel affichePanel = new JPanel();
             affichePanel.setLayout(null);
             affichePanel.setBounds(20,20, 400, 575);
             affichePanel.setBackground(new Color(0xFFEB62));
 
-
-
-            // Bouton valider les horaires
             
             
             btnValiderHoraire = new JButton("Valider la séance");
@@ -72,23 +68,20 @@ import Modele.DAO.DaoFactory;
             horairesPanel = new JPanel();
             horairesPanel.setBackground(new Color(0xFFEB62));   //FFEB62
             horairesPanel.setBounds(500,100,800,400);
-            horairesPanel.setLayout(new GridLayout(0, 4, 10, 10)); // Layout pour les horaires
+            horairesPanel.setLayout(new GridLayout(0, 4, 10, 10)); 
 
 
 
-            // Titre "Séances"
+    
             JLabel titrePage = new JLabel("Séances");
             titrePage.setFont(new Font(titrePage.getFont().getName(), Font.BOLD, 24));
             titrePage.setBounds(730,30,200,50);
 
-            // Configuration du spinner de date
             dateSpinner = createDateSpinner();
             btnValiderDate = createValidateButton();
 
 
 
-
-            // Panneau pour le spinner de date et le bouton valider
             JPanel datePanel = new JPanel();
             datePanel.setLayout(null);  
 
@@ -104,8 +97,6 @@ import Modele.DAO.DaoFactory;
             rightPanel.add(datePanel);
 
             rightPanel.add(btnValiderHoraire);
-            
-            // Ajout des composants au panneau de droite
             
             rightPanel.add(titrePage);
             

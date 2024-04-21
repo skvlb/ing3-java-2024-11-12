@@ -80,7 +80,7 @@ public class PageTarifsConnecte extends JPanel {
             int userId = utilisateurDao.getIdUtilisateurParEmail(userEmail);
             Billet billet = new Billet(0, userId, idProgrammation, prix, false);
             DaoFactory daoFactory = pagePrincipale.getDaoFactory();
-            pagePrincipale.changePanel(new PanierPage(billet,daoFactory,siegeNumero));  // Utilise changePanel pour afficher le panier
+            pagePrincipale.changePanel(new PanierPage(billet,daoFactory,siegeNumero)); 
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner un tarif.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }

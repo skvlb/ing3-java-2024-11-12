@@ -29,7 +29,6 @@ public class TarifsControleur{
             // Création des billets
             List<Billet> billets = new ArrayList<>();
             int idProgrammation=4;//exemple mais on devra le récupérer des pages précèdente
-            // Exemple de création d'un billet avec la sélection comme type
             Random random = new Random();
             int id_billet = random.nextInt(10000) + 1;
             Billet billet = new Billet(id_billet, id, idProgrammation, prix, false);
@@ -46,14 +45,12 @@ public class TarifsControleur{
     }
 
     public static void traiterSelectionTarif(String tarif, int idProgrammation, int siegeNumero, String userEmail) {
-        // Logique pour traiter le tarif sélectionné
         System.out.println("Traitement du tarif: " + tarif + " pour la programmation ID: " + idProgrammation +
                            ", siège numéro: " + siegeNumero + ", utilisateur: " + userEmail);
         ajouterAuPanier(tarif, idProgrammation, siegeNumero, userEmail);
     }
 
     private static void ajouterAuPanier(String tarif, int idProgrammation, int siegeNumero, String userEmail) {
-        // Logique d'ajout au panier
         System.out.println("Ajout au panier: " + tarif + ", pour le siège: " + siegeNumero);
     }
 }

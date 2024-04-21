@@ -16,17 +16,16 @@ public class PagePrincipale extends JFrame {
         setSize(1920, 1080);
         setLocationRelativeTo(null);
 
-        // Créer et ajouter le Bordereau
+        // création et ajout du Bordereau
         Bordereau bordereau = new Bordereau(this);
         add(bordereau, BorderLayout.NORTH);
 
-        // Initialiser le panel central pour le contenu
         centerPanel = new JPanel();
         centerPanel.setLayout(new BorderLayout());
         centerPanel.setBackground(Color.LIGHT_GRAY);
         add(centerPanel, BorderLayout.CENTER);
 
-        daoFactory = DaoFactory.getInstance(); // Assurez-vous que DaoFactory est correctement configuré
+        daoFactory = DaoFactory.getInstance();
         initializeCenterPanel();
 
         setVisible(true);
@@ -40,34 +39,28 @@ public class PagePrincipale extends JFrame {
         FilmDaoImpl filmDao = new FilmDaoImpl(daoFactory);
         List<Film> films = filmDao.getAllFilms();
     
-        centerPanel.removeAll(); // Nettoie le panel avant d'ajouter quoi que ce soit
+        centerPanel.removeAll(); 
     
-        // Ajout du titre "La sélection du mois"
         JLabel titrePage = new JLabel("La sélection du mois", SwingConstants.CENTER);
         titrePage.setFont(new Font(titrePage.getFont().getName(), Font.BOLD, 24));
         centerPanel.add(titrePage, BorderLayout.NORTH);
     
-        // Création du panel pour les films avec un layout approprié
         JPanel filmsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 20));
         filmsPanel.setOpaque(false);
     
-        // Ajout des films
         int compteur = 0;
         for (Film film : films) {
-            if (compteur < 3) { // Limite le nombre de boutons à trois
+            if (compteur < 3) { 
                 JButton filmButton = createFilmButton(film.getImagePath(), film.getId(), film.getTitre());
                 filmsPanel.add(filmButton);
-                compteur++; // Incrémente le compteur
+                compteur++; 
             } else {
-                break; // Sort de la boucle après avoir ajouté trois boutons
+                break; 
             }
         }
     
-    
-        // Ajoute le panel des films au centre du centerPanel
         centerPanel.add(filmsPanel, BorderLayout.CENTER);
     
-        // Rafraîchissement du panel pour afficher les modifications
         centerPanel.revalidate();
         centerPanel.repaint();
     }
@@ -78,12 +71,11 @@ public class PagePrincipale extends JFrame {
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
-        button.setToolTipText(filmTitle);  // Afficher le titre du film lorsque la souris survole le bouton
+        button.setToolTipText(filmTitle); 
         button.addActionListener(e -> System.out.println("Film ID: " + filmId + " cliqué - " + filmTitle));
         return button;
     }
 
-    // Si nécessaire, une méthode pour changer le panel affiché au centre
     public void changePanel(JPanel newPanel) {
         centerPanel.removeAll();
         centerPanel.add(newPanel, BorderLayout.CENTER);

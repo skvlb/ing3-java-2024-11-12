@@ -31,7 +31,6 @@ public class PageCreationProgrammation extends JPanel {
     private JComboBox<String> cbxSalles, cbxFilms;
 
     public PageCreationProgrammation() {
-        // Utilisation de null layout pour un positionnement manuel
         setLayout(null);
                 
         JPanel panelAffichage = new JPanel();
@@ -52,7 +51,6 @@ public class PageCreationProgrammation extends JPanel {
         }
 
 
-        // Initialisation des composants
         JPanel creationProg = new JPanel();
         creationProg.setLayout(null);
         creationProg.setBackground(new Color(0xFFEB62));
@@ -187,12 +185,11 @@ public class PageCreationProgrammation extends JPanel {
         bouton.setPreferredSize(new Dimension(120, 60));
         bouton.setFocusPainted(false);
     }
-    // Méthode pour attacher un ActionListener au bouton de validation
     public void setValiderListener(ActionListener listener) {
         btnValider.addActionListener(listener);
     }
 
-    // Méthodes pour récupérer les données saisies
+    // méthodes pour récupérer les données saisies
     public String getDate() {
         return txtDate.getText();
     }

@@ -43,7 +43,7 @@ public class SelectionSiege extends JPanel {
             boutonSiege.setContentAreaFilled(false);
             boutonSiege.setBorderPainted(false);
             boutonSiege.setFocusPainted(false);
-            customizeButton(boutonSiege, i); // Utilisation de la méthode customizeButton
+            customizeButton(boutonSiege, i); 
 
             if (siegesOccupes.contains(i + 1)) {
                 boutonSiege.setIcon(iconeSiegeSelectionne);
@@ -90,7 +90,7 @@ public class SelectionSiege extends JPanel {
             SiegeDaoImpl siegeDAO = new SiegeDaoImpl(daoFactory);
             siegeDAO.ajouterSiege(userEmail, siegeNumero, idProgrammation);
             JOptionPane.showMessageDialog(this, "Siège " + siegeNumero + " validé pour la programmation " + idProgrammation);
-            // Navigation vers la page de tarif avec les bons paramètres
+            // transfere vers la page des tarifs
             mainFrame.changePanel(new PageTarifsConnecte(idProgrammation, siegeNumero, userEmail));
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner un siège avant de valider.", "Aucun siège sélectionné", JOptionPane.WARNING_MESSAGE);

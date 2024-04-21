@@ -56,12 +56,12 @@ public class SelectionSiege extends JPanel {
 
         JLabel ecranLabel = new JLabel("Écran", SwingConstants.CENTER);
         ecranLabel.setFont(new Font(ecranLabel.getFont().getName(), Font.BOLD, 18));
-        add(ecranLabel, BorderLayout.NORTH);
+        add(ecranLabel, BorderLayout.SOUTH);
         add(panelSieges, BorderLayout.CENTER);
 
         JButton btnValider = new JButton("Valider");
         btnValider.addActionListener(this::validerSiege);
-        add(btnValider, BorderLayout.SOUTH);
+        add(btnValider, BorderLayout.NORTH);
     }
 
     private ImageIcon createIcon(String path) {

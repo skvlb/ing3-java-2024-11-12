@@ -90,10 +90,8 @@ public class SelectionSiege extends JPanel {
             SiegeDaoImpl siegeDAO = new SiegeDaoImpl(daoFactory);
             siegeDAO.ajouterSiege(userEmail, siegeNumero, idProgrammation);
             JOptionPane.showMessageDialog(this, "Siège " + siegeNumero + " validé pour la programmation " + idProgrammation);
-            PageTarifsConnecte pageTarifs = new PageTarifsConnecte(idProgrammation, siegeNumero, userEmail);
-            mainFrame.changePanel(pageTarifs);
-            // Ici, ajoutez la logique de navigation vers la page de tarif
-            // mainFrame.changePanel(new PageTarifsConnecte());
+            // Navigation vers la page de tarif avec les bons paramètres
+            mainFrame.changePanel(new PageTarifsConnecte(idProgrammation, siegeNumero, userEmail));
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner un siège avant de valider.", "Aucun siège sélectionné", JOptionPane.WARNING_MESSAGE);
         }

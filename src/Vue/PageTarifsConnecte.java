@@ -69,9 +69,7 @@ public class PageTarifsConnecte extends JPanel {
 
         return radioButton;
     }
-
-
-
+    
     private void actionBoutonPanier(ActionEvent e) {
         try {
             String selectedTarif = getSelectedTarif();  // Assurez-vous que cette méthode renvoie une chaîne non vide correctement

@@ -42,6 +42,7 @@ public class PanierPage extends JPanel {
 
         JPanel panelAffichage = new JPanel();
         panelAffichage.setLayout(null);
+        panelAffichage.setBackground(new Color(0xFFeb62));  //FFEB62
         panelAffichage.setBackground(new Color(0xFFEB62));  //FFEB62
         panelAffichage.setBounds(10,10,1500,625);
 

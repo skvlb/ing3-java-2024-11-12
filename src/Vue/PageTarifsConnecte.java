@@ -43,7 +43,7 @@ public class PageTarifsConnecte extends JPanel {
 
         JPanel paneltarif = new JPanel(); 
         paneltarif.setLayout(null);
-        paneltarif.setBackground(new Color(0xFF0000));  //FFEB62
+        paneltarif.setBackground(new Color(0xFFEB62));  //FFEB62
         paneltarif.setBounds(500,20,500,625);
 
 
